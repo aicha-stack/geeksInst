@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+ </head>
+ <body>
+
+    <h1>Mad Libs</h1>
+
+    <form id="libform">
+        <label for="noun">Noun:</label><input type="text" id="noun"><br>
+        <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+        <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+        <label for="verb">Verb:</label><input type="text" id="verb"><br>
+        <label for="place">A place:</label><input type="text" id="place"><br>
+        <button id="lib-button">Lib it!</button>
+    </form>
+
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+
+    <script >
+    const form = document.getElementById("libform");
+    const storyEl = document.getElementById("story");
+    const shuffleBtn = document.getElementById("shuffle-button");
+
+    let currentWords = {};
+    const stories = [
+      (w) => `${w.person} went to ${w.place} to ${w.verb} a very ${w.adjective} ${w.noun}.`,
+      (w) => `Once upon a time, ${w.person} found a ${w.adjective} ${w.noun} at ${w.place} and decided to ${w.verb}.`,
+      (w) => `In ${w.place}, ${w.person} saw a ${w.noun} that was extremely ${w.adjective}, so they ${w.verb}.`
+    ];
+
+    function generateStory(words) {
+     const index = Math.floor(Math.random() * stories.length);
+      return stories[index](words);
+    }
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const noun = document.getElementById("noun").value.trim();
+      const adjective = document.getElementById("adjective").value.trim();
+      const person = document.getElementById("person").value.trim();
+      const verb = document.getElementById("verb").value.trim();
+      const place = document.getElementById("place").value.trim();
+
+      if (!noun || !adjective || !person || !verb || !place) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      currentWords = { noun, adjective, person, verb, place };
+      storyEl.textContent = generateStory(currentWords);
+    });
+
+    shuffleBtn.addEventListener("click", function() {
+      if (Object.keys(currentWords).length === 0) return;
+      storyEl.textContent = generateStory(currentWords);
+    });
+ </script>
+
+ </body>
+</html>

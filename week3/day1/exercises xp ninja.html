@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1 </title>
+</head>
+<body>
+  <h2>Exercise 1</h2>
+  <div id="output"></div>
+
+  <script>
+    const person1 = {
+      fullName: "Aicha ezzahraoui",
+      mass: 68,     
+      height: 1.68, 
+      calcBMI: function() {
+        return this.mass / (this.height * this.height);
+      }
+    };
+
+    const person2 = {
+      fullName: "adam ezzahraoui",
+      mass: 85,     
+      height: 1.8,
+      calcBMI: function() {
+        return this.mass / (this.height * this.height);
+      }
+    };
+
+    function compareBMI(p1, p2) {
+      const bmi1 = p1.calcBMI();
+      const bmi2 = p2.calcBMI();
+      
+      if (bmi1 > bmi2) {
+        return p1.fullName + " has the higher BMI (" + bmi1.toFixed(2) + ")";
+      } else if (bmi2 > bmi1) {
+        return p2.fullName + " has the higher BMI (" + bmi2.toFixed(2) + ")";
+      } else {
+        return "Both have the same BMI (" + bmi1.toFixed(2) + ")";
+      }
+    }
+  </script>
+</body>
+</html>
+///
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grade Average</title>
+</head>
+<body>
+  <h2>Grade Average</h2>
+  <div id="output"></div>
+
+  <script>
+    function calculateAverage(grades) {
+      let sum = 0;
+      for (let i = 0; i < grades.length; i++) {
+        sum += grades[i];
+      }
+      return grades.length;
+    }
+
+    function findAvg(grades) {
+      const avg = calculateAverage(grades);
+      let msg = "Average: " + avg + ". ";
+      msg += avg >= 65 ? "You passed." : "You failed.";
+    }
+
+    const myGrades = [70, 85, 60, 90, 50];
+    findAvg(myGrades);
+  </script>
+</body>
+</html>

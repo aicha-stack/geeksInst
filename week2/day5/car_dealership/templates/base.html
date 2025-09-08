@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Dealership</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-pink-50 font-sans">
+    <nav class="bg-pink-400 p-4 text-white flex justify-between">
+        <a href="{{ url_for('index') }}" class="font-bold text-xl">Car Dealership</a>
+        <div>
+            <a href="{{ url_for('charts') }}"
+                class="bg-white text-pink-500 px-3 py-1 rounded hover:bg-pink-100">charts</a>
+            <a href="{{ url_for('create') }}" class="bg-white text-pink-500 px-3 py-1 rounded hover:bg-pink-100">Add
+                Car</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, msg in messages %}
+        <div
+            class="p-2 mb-2 rounded {% if category == 'pink' %}bg-pink-200 text-red-800{% else %}bg-blue-200 text-blue-800{% endif %}">
+            {{ msg }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+{% block content %}         {% endblock %}
+
+
+    </div>
+      <!-- Floating Chat Button -->
+<div id="chat-button" 
+     class="fixed bottom-6 right-6 bg-pink-600 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-pink-700">
+  💬
+</div>
+
+<!-- Chatbox (hidden by default) -->
+<div id="chatbox" 
+     class="hidden fixed bottom-20 right-6 w-80 bg-white rounded-lg shadow-lg border border-gray-200">
+  <div class="bg-pink-600 text-white px-4 py-2 rounded-t-lg flex justify-between items-center">
+    <span class="font-bold">AI Assistant</span>
+    <button id="close-chat" class="text-white font-bold">✕</button>
+  </div>
+  <div id="chat-messages" class="p-3 h-64 overflow-y-auto text-sm text-gray-700">
+    <p class="text-gray-500">How can I help you...</p>
+  </div>
+  <form id="chat-form" class="flex border-t">
+    <input type="text" id="chat-input" name="question" placeholder="Type a message..."
+           class="flex-grow p-2 text-sm focus:outline-none">
+    <button type="submit" class="bg-pink-600 text-white px-4 hover:bg-pink-700">Send</button>
+  </form>
+</div>
+
+<script>
+  const chatButton = document.getElementById("chat-button");
+  const chatbox = document.getElementById("chatbox");
+  const closeChat = document.getElementById("close-chat");
+
+  chatButton.addEventListener("click", () => {
+    chatbox.classList.toggle("hidden");
+  });
+
+  closeChat.addEventListener("click", () => {
+    chatbox.classList.add("hidden");
+  });
+
+  // Handle chat form
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
+  const chatMessages = document.getElementById("chat-messages");
+
+  chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+
+    // Display user message
+    chatMessages.innerHTML += `<div class="mb-2"><strong>You:</strong> ${userMessage}</div>`;
+    chatInput.value = "";
+
+    // Send to backend
+    const response = await fetch("/ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: userMessage }),
+    });
+
+    const data = await response.json();
+    chatMessages.innerHTML += `<div class="mb-2 text-pink-600"><strong>AI:</strong> ${data.answer}</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  });
+</script>
+</body>
+
+</html>

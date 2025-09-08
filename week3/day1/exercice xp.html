@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exercise 1 </title>
+</head>
+<body>
+  <h2>Exercise 1</h2>
+  <div id="out"></div>
+
+  <script>
+    const out = document.getElementById("out");
+    const people = ["Greg", "Mary", "Devon", "James"];
+    people.shift();
+    const jIndex = people.indexOf("James");
+    people.push(aicha);
+    const maryIndex = people.indexOf("Mary");
+    const copyPeople = people.slice(1, people.length - 1);
+    const fooIndex = people.indexOf("Foo"); 
+    const last = people[people.length - 1];
+    let allLoop = "";
+    for (let i = 0; i < people.length; i++) {
+      allLoop += people[i] + "\n";
+    }
+    let stopAtDevon = "";
+    for (let i = 0; i < people.length; i++) {
+      stopAtDevon += people[i] + "\n";
+      if (people[i] === "Devon") break;
+    }
+  </script>
+</body>
+</html>
+<!--exercise2-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2 </title>
+</head>
+<body>
+  <h2>Exercise 2</h2>
+  <div id="output"></div>
+
+  <script>
+    const colors = ["blue", "red", "pink", "purple", "black"];
+    let text = "";
+    for (let i = 0; i < colors.length; i++) {
+      text += "My #" + (i + 1) + " choice is " + colors[i] + "<br>";
+    }
+
+    text += "<br>"; 
+    const suffixes = ["st", "nd", "rd", "th", "th"]; 
+    
+    for (let i = 0; i < colors.length; i++) {
+      text += "My " + (i + 1) + suffixes[i] + " choice is " + colors[i] + "<br>";
+    }
+
+  </script>
+</body>
+</html>
+<!--exercise4-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 </title>
+</head>
+<body>
+  <h2>Exercise 3</h2>
+  <script>
+
+    let number = prompt("Please enter a number:");
+    number = Number(number);
+    console.log("Type of number:", typeof number);
+    while (number < 10) {
+      number = Number(prompt("Number is too small. Please enter a new number:"));
+    }
+
+    console.log("Great! You entered:", number);
+  </script>
+</body>
+</html>
+<!--exercise4-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4 </title>
+</head>
+<body>
+  <h2>Exercise 4</h2>
+  <script>
+    const building = {
+      numberOfFloors: 4,
+      numberOfAptByFloor: {
+        firstFloor: 3,
+        secondFloor: 4,
+        thirdFloor: 9,
+        fourthFloor: 2,
+      },
+      nameOfTenants: ["Sarah", "Dan", "David"],
+      numberOfRoomsAndRent: {
+        sarah: [3, 990],
+        dan: [4, 1000],
+        david: [1, 500],
+      },
+    };
+    console.log("Number of floors:", building.numberOfFloors);
+    console.log("Apartments on 1st floor:", building.numberOfAptByFloor.firstFloor);
+    console.log("Apartments on 3rd floor:", building.numberOfAptByFloor.thirdFloor);
+    const secondTenant = building.nameOfTenants[1]; 
+    const roomsSecondTenant = building.numberOfRoomsAndRent[secondTenant.toLowerCase()][0];
+    console.log("Second tenant:", secondTenant, "| Rooms:", roomsSecondTenant);
+    const sarahRent = building.numberOfRoomsAndRent.sarah[1];
+    const davidRent = building.numberOfRoomsAndRent.david[1];
+    const danRent = building.numberOfRoomsAndRent.dan[1];
+
+    if (sarahRent + davidRent > danRent) {
+      building.numberOfRoomsAndRent.dan[1] = 1200;
+    }
+
+    console.log("Updated rents:", building.numberOfRoomsAndRent);
+  </script>
+</body>
+</html>
+<!--EXErcise5-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 5 </title>
+</head>
+<body>
+  <h2>Exercise 5 </h2>
+  
+
+  <script>
+    const family = {
+      father: "noureddine",
+      mother: "amina",
+      daughter: "aicha",
+      son: "adam"
+    };
+    console.log("Keys:");
+    for (let key in family) {
+      console.log(key);
+    }
+    console.log("Values:");
+    for (let key in family) {
+      console.log(family[key]);
+    }
+  </script>
+</body>
+</html>
+<!--exercice6-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 6</title>
+</head>
+<body>
+  <h2>Exercise6: </h2>
+
+  <script>
+    const details = {
+      my: 'name',
+      is: 'Rudolf',
+      the: 'reindeer'
+    };
+
+    let sentence = "";
+    for (let key in details) {
+      sentence += key + " " + details[key] + " ";
+    }
+
+    console.log(sentence.trim());
+  </script>
+</body>
+</html>
+//
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 7 </title>
+</head>
+<body>
+  <h2>Exercise 7</h2>
+  
+
+  <script>
+    const names = ["Jack", "Philip", "Sarah", "Amanda", "Bernard", "Kyle"];
+    let letters = [];
+    for (let i = 0; i < names.length; i++) {
+      letters.push(names[i][0]);
+    }
+    letters.sort();
+    const secretName = letters.join("");
+
+    console.log("Secret Society Name:", secretName); 
+  </script>
+</body>
+</html>

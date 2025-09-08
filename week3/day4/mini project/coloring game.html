@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Coloring Squares</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #colorList button {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(16, 30px);
+      grid-template-rows: repeat(16, 30px);
+      gap: 2px;
+      margin-top: 20px;
+    }
+    .square {
+      width: 30px;
+      height: 30px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Coloring Squares</h2>
+
+<div id="colorList">
+  <button style="background-color:red;"></button>
+  <button style="background-color:green;"></button>
+  <button style="background-color:blue;"></button>
+  <button style="background-color:yellow;"></button>
+  <button style="background-color:orange;"></button>
+  <button style="background-color:purple;"></button>
+    <button style="background-color:black;"></button>
+    <button style="background-color:white;"></button>
+    <button style="background-color:pink;"></button>
+    <button style="background-color:brown;"></button>
+    <button style="background-color:gray;"></button>
+    <button style="background-color:cyan;"></button>
+    <button style="background-color:magenta;"></button>
+    <button style="background-color:lime;"></button>
+    <button style="background-color:navy;"></button>
+    <button style="background-color:teal;"></button>
+</div>
+
+<div id="grid"></div>
+
+<script>
+  const grid = document.getElementById("grid");
+  const colorButtons = document.querySelectorAll("#colorList button");
+  let currentColor = "red";
+  let isDrawing = false;
+
+  colorButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentColor = btn.style.backgroundColor;
+    });
+  });
+
+  const gridSize = 16;
+  for (let i = 0; i < gridSize * gridSize; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+
+    square.addEventListener("mousedown", () => {
+      square.style.backgroundColor = currentColor;
+      isDrawing = true;
+    });
+
+    square.addEventListener("mouseover", () => {
+      if (isDrawing) square.style.backgroundColor = currentColor;
+    });
+
+    grid.appendChild(square);
+  }
+
+  document.addEventListener("mouseup", () => {
+    isDrawing = false;
+  });
+</script>
+
+</body>
+</html>
+

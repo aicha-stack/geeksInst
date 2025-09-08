@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drum Kit</title>
+  <style>
+    body {
+      background: #222;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('colorful-celebration-holi-festival_23-2151934844.avif');
+      background-repeat: no-repeat;
+        background-size: cover;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .drum-container {
+      display: flex;
+      gap: 15px;
+    }
+    .drum {
+      width: 80px;
+      height: 80px;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .drum:active,
+    .playing {
+      transform: scale(1.1);
+      background: #ff4757;
+      box-shadow: 0 0 15px #ff4757;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🥁 Drum Kit</h1>
+<div class="drum-container">
+  <div class="drum" data-key="65">A</div>
+  <div class="drum" data-key="83">S</div>
+  <div class="drum" data-key="68">D</div>
+  <div class="drum" data-key="70">F</div>
+  <div class="drum" data-key="71">G</div>
+  <div class="drum" data-key="72">H</div>
+  <div class="drum" data-key="74">J</div>
+  <div class="drum" data-key="75">K</div>
+<div class="drum" data-key="76">L</div>
+
+
+</div>
+
+
+<audio data-key="65" src="sounds/kick.wav"></audio>
+<audio data-key="83" src="sounds/snare.wav"></audio>
+<audio data-key="68" src="sounds/tom.wav"></audio>
+<audio data-key="70" src="sounds/crash.wav"></audio>    
+<audio data-key="71" src="sounds/hihat.wav"></audio>
+<audio data-key="72" src="sounds/ride.wav"></audio> 
+<audio data-key="74" src="sounds/openhat.wav"></audio>
+<audio data-key="75" src="sounds/clap.wav"></audio>
+<audio data-key="76" src="sounds/tink.wav"></audio>
+
+
+<script>
+  function playSound(e) {
+    let keyCode;
+    if (e.type === "keydown") {
+      keyCode = e.keyCode || e.which;
+    } else if (e.type === "click") {
+      keyCode = this.getAttribute("data-key");
+    }
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    const drum = document.querySelector(`.drum[data-key="${keyCode}"]`);
+
+    if (!audio) return;
+
+    audio.currentTime = 0; 
+    audio.play();
+
+    drum.classList.add("playing");
+    setTimeout(() => drum.classList.remove("playing"), 150);
+  }
+
+  window.addEventListener("keydown", playSound);
+
+  const drums = document.querySelectorAll(".drum");
+  drums.forEach(drum => drum.addEventListener("click", playSound));
+</script>
+
+</body>
+</html>

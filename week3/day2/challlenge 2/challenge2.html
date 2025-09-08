@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Words in Frame</title>
+</head>
+<body>
+  <script>
+    const input = prompt("Enter words separated by commas:");
+    const words = input.split(",").map(w => w.trim());
+    const maxLen = Math.max(...words.map(w => w.length));
+    const border = "*".repeat(maxLen + 4);
+
+    document.write(border + "<br>");
+    words.forEach(word => {
+      document.write("* " + word.padEnd(maxLen, " ") + " *<br>");
+    });
+    document.write(border);
+  </script>
+</body>
+</html>

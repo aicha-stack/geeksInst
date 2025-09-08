@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Event Manager{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-50 font-sans">
+  <nav class="bg-pink-400 p-4 flex justify-between items-center shadow-md">
+    <h1 class="text-2xl font-bold text-white">Event Manager</h1>
+    <div>
+      <a href="/" class="bg-brown-600 text-pink-100 px-4 py-2 rounded hover:bg-brown-700 mr-2">Events</a>
+      <a href="/create" class="bg-pink-200 text-brown-800 px-4 py-2 rounded hover:bg-pink-300">Add Event</a>
+      <a href="/stats" class="bg-brown-500 text-pink-100 px-4 py-2 rounded hover:bg-brown-600 ml-2">Stats</a>
+    </div>
+  </nav>
+  
+  <div class="container mx-auto mt-6">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="mb-4 p-3 rounded {{ 'bg-green-200 text-green-800' if category=='green' else '' }} {{ 'bg-red-200 text-red-800' if category=='red' else '' }} {{ 'bg-blue-200 text-blue-800' if category=='blue' else '' }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

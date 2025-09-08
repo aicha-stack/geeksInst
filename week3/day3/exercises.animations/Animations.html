@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p {
+            background: yellow;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <button id="clear">Clear Interval</button>
+
+    <script>
+        setTimeout(() => {
+            alert("Hello World");
+        }, 2000);
+        setTimeout(() => {
+            const container = document.getElementById("container");
+            const p = document.createElement("p");
+            p.textContent = "Hello World";
+            container.appendChild(p);
+        }, 2000);
+        const container = document.getElementById("container");
+        const button = document.getElementById("clear");
+        let count = 0;
+
+        const intervalId = setInterval(() => {
+            const p = document.createElement("p");
+            p.textContent = "Hello World";
+            container.appendChild(p);
+            count++;
+
+            if (count === 5) clearInterval(intervalId);
+        }, 2000);
+
+        button.addEventListener("click", () => clearInterval(intervalId));
+    </script>
+</body>
+</html>
+<!--exercise2-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background: yellow;
+        }
+        #animate {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <p><button onclick="myMove()">Click Me</button></p>
+    <div id="container">
+        <div id="animate"></div>
+    </div>
+
+    <script>
+        function myMove() {
+            const box = document.getElementById("animate");
+            let pos = 0; 
+            const containerWidth = document.getElementById("container").offsetWidth;
+            const boxWidth = box.offsetWidth;
+
+            const id = setInterval(frame, 1); 
+
+            function frame() {
+                if (pos >= containerWidth - boxWidth) {
+                    clearInterval(id); 
+                } else {
+                    pos++;
+                    box.style.left = pos + "px"; 
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

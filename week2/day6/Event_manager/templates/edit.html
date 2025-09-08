@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Edit Event{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold text-brown-800 mb-4">Edit Event</h2>
+<form method="POST" class="bg-white p-6 rounded shadow max-w-lg">
+  <label class="block mb-2 text-brown-700">Name</label>
+  <input type="text" name="name" value="{{ event.name }}" class="w-full border p-2 mb-4 rounded">
+  
+  <label class="block mb-2 text-brown-700">Date</label>
+  <input type="date" name="date" value="{{ event.date }}" class="w-full border p-2 mb-4 rounded">
+  
+  <label class="block mb-2 text-brown-700">Location</label>
+  <input type="text" name="location" value="{{ event.location }}" class="w-full border p-2 mb-4 rounded">
+  
+  <label class="block mb-2 text-brown-700">Description</label>
+  <textarea name="description" class="w-full border p-2 mb-4 rounded">{{ event.description }}</textarea>
+  
+  <label class="block mb-2 text-brown-700">Organizer ID</label>
+  <input type="number" name="organizer_id" value="{{ event.organizer_id }}" class="w-full border p-2 mb-4 rounded">
+  
+  <button type="submit" class="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500">Update</button>
+</form>
+{% endblock %}

@@ -1,0 +1,296 @@
+<!-- exercise 1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1</title>
+</head>
+<body>
+  <h1>Numbers Divisible</h1>
+  
+
+  <script>
+    function displayNumbersDivisible(divisor = 23) {
+      let sum = 0;
+      let output = "";
+
+      for (let i = 0; i <= 500; i++) {
+        if (i % divisor === 0) {
+          output += i + " ";
+          sum += i;
+        }
+      }
+
+      console.log(output.trim());
+      console.log("Sum :", sum);
+    }
+  </script>
+</body>
+</html>
+<!-- exercise 2 -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2 </title>
+</head>
+<body>
+  <h1>Shopping List</h1><
+<script>
+    const stock = { 
+      "banana": 6, 
+      "apple": 0,
+      "pear": 12,
+      "orange": 32,
+      "blueberry": 1
+    };
+
+    const prices = {    
+      "banana": 4, 
+      "apple": 2, 
+      "pear": 1,
+      "orange": 1.5,
+      "blueberry": 10
+    };
+    const shoppingList = ["banana", "orange", "apple"];
+    function myBill() {
+      let total = 0;
+
+      for (let item of shoppingList) {
+        if (item in stock && stock[item] > 0) {
+          total += prices[item];  
+          stock[item] -= 1;        
+      }
+
+      return total;
+    }
+    const totalPrice = myBill();
+    console.log("Total Price:", totalPrice);
+    console.log("Remaining Stock:", stock);
+  </script>
+</body>
+</html>
+
+<!-- exercise 3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 </title>
+</head>
+<body>
+  <script>
+
+    function changeEnough(itemPrice, amountOfChange) {
+     
+      const [quarters, dimes, nickels, pennies] = amountOfChange;
+      const total = quarters * 0.25 + dimes * 0.10 + nickels * 0.05 + pennies * 0.01;
+      return total >= itemPrice;
+    }
+
+  </script>
+</body>
+</html>
+<!-- exercise 4 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4 </title>
+</head>
+<body>
+
+  <script>
+ 
+    function hotelCost() {
+      let nights;
+      do {
+        nights = prompt("How many nights would you like to stay in the hotel?");
+      } while (isNaN(nights) || nights === "" || nights === null);
+
+      return nights * 140;
+    }
+
+ 
+    function planeRideCost() {
+      let destination;
+      do {
+        destination = prompt("What is your destination?");
+      } while (!destination || typeof destination !== "string");
+
+      destination = destination.toLowerCase();
+
+      if (destination === "london") return 183;
+      else if (destination === "paris") return 220;
+      else return 300;
+    }
+    function rentalCarCost() {
+      let days;
+      do {
+        days = prompt("How many days would you like to rent the car?");
+      } while (isNaN(days) || days === "" || days === null);
+
+      let cost = days * 40;
+      if (days > 10) cost *= 0.95;
+      return cost;
+    }
+
+    
+    function totalVacationCost() {
+      const hotel = hotelCost();
+      const plane = planeRideCost();
+      const car = rentalCarCost();
+
+      console.log(`The car cost: $${car.toFixed(2)}, the hotel cost: $${hotel.toFixed(2)}, the plane tickets cost: $${plane.toFixed(2)}`);
+      const total = hotel + plane + car;
+      console.log(`Total vacation cost: $${total.toFixed(2)}`);
+      return total;
+    }
+    totalVacationCost();
+  </script>
+</body>
+</html>
+<!-- exercise 5 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 5</title>
+</head>
+<body>
+  <div id="container">Users:</div>
+  <ul class="list">
+    <li>John</li>
+    <li>Pete</li>
+  </ul>
+  <ul class="list">
+    <li>David</li>
+    <li>Sarah</li>
+    <li>Dan</li>
+  </ul>
+
+  <script>
+    const container = document.getElementById("container");
+    console.log(container);
+
+    document.querySelectorAll(".list")[0].children[1].textContent = "Richard";
+    document.querySelectorAll(".list")[1].children[1].remove();
+
+    document.querySelectorAll(".list").forEach(ul => {
+      ul.children[0].textContent = "Aisha";
+    });
+
+    document.querySelectorAll(".list").forEach(ul => {
+      ul.classList.add("student_list");
+    });
+    document.querySelectorAll(".list")[0].classList.add("university", "attendance");
+
+    container.style.backgroundColor = "lightblue";
+    container.style.padding = "20px";
+
+    document.querySelectorAll(".list")[1].children[1].style.display = "none";
+    document.querySelectorAll(".list")[0].children[1].style.border = "2px solid black";
+
+    if (container.style.backgroundColor === "lightblue") {
+      const names = [...document.querySelectorAll(".list")].map(ul => ul.children[0].textContent);
+      alert("Hello " + names.join(" and "));
+    }
+  </script>
+</body>
+</html>
+<!-- exercise 6 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 6</title>
+</head>
+<body>
+  <div id="navBar">
+    <ul>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">My Friends</a></li>
+      <li><a href="#">Messenger</a></li>
+      <li><a href="#">My Pics</a></li>
+    </ul>
+  </div>
+
+  <script>
+    const navDiv = document.getElementById("navBar");
+    navDiv.setAttribute("id", "socialNetworkNavigation");
+
+    const ul = navDiv.querySelector("ul");
+    const newLi = document.createElement("li");
+    const text = document.createTextNode("Logout");
+    newLi.appendChild(text);
+    ul.appendChild(newLi);
+
+    const firstLi = ul.firstElementChild;
+    const lastLi = ul.lastElementChild;
+    console.log("First link:", firstLi.textContent);
+    console.log("Last link:", lastLi.textContent);
+  </script>
+</body>
+</html>
+<!-- exercise 7 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 7</title>
+  <style>
+    .book {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+    .book img {
+      width: 100px;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="listBooks"></section>
+
+  <script>
+    const allBooks = [
+      {
+        title: "Harry Potter",
+        author: "J.K. Rowling",
+        image: "https://covers.openlibrary.org/b/id/7984916-L.jpg",
+        alreadyRead: true
+      },
+      {
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        image: "https://covers.openlibrary.org/b/id/8231856-L.jpg",
+        alreadyRead: false
+      }
+    ];
+
+    const section = document.querySelector(".listBooks");
+
+    allBooks.forEach(book => {
+      const div = document.createElement("div");
+      div.classList.add("book");
+
+      const details = document.createElement("p");
+      details.textContent = `${book.title} written by ${book.author}`;
+      if (book.alreadyRead) {
+        details.style.color = "red";
+      }
+
+      const img = document.createElement("img");
+      img.src = book.image;
+
+      div.appendChild(details);
+      div.appendChild(img);
+      section.appendChild(div);
+    });
+  </script>
+</body>
+</html>

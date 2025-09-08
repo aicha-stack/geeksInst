@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1 </title>
+</head>
+<body>
+  <h2>Exercise 1</h2>
+  <script>
+    let numbers = [123, 8409, 100053, 333333333, 7];
+
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i] % 3 === 0) {
+        console.log(numbers[i] + " divisible by 3? true");
+      } else {
+        console.log(numbers[i] + " divisible by 3? false");
+      }
+    }
+  </script>
+</body>
+</html>
+//
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dance Guest List</title>
+</head>
+<body>
+  <h2>Dance Guest List</h2>
+   <script>
+    const guestList = {
+      randy: "Germany",
+      karla: "France",
+      wendy: "Japan",
+      norman: "England",
+      sam: "Argentina"
+    }; 
+    let name = prompt("Enter your name:").toLowerCase();
+    if (name in guestList) {
+      console.log("Hi! I'm " + name.charAt(0).toUpperCase() + name.slice(1) + 
+                  ", and I'm from " + guestList[name] + ".");
+    } else {
+      console.log("Hi! I'm a guest.");
+    }
+  </script>
+</body>
+</html>
+//
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 </title>
+</head>
+<body>
+  <h2>Exercise 3</h2>
+ 
+
+  <script>
+    let age = [20, 5, 12, 43, 98, 55];
+    let sum = 0;
+    for (let i = 0; i < age.length; i++) {
+      sum += age[i];
+    }
+    console.log("Sum of all ages:", sum);
+    let maxAge = age[0]; 
+    for (let i = 1; i < age.length; i++) {
+      if (age[i] > maxAge) {
+        maxAge = age[i];
+      }
+    }
+    console.log("Highest age:", maxAge);
+  </script>
+</body>
+</html>
+

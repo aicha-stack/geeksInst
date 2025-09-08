@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>exercise</title>
+</head>
+<body>
+  <h2>Exercise:</h2>
+  <div id="output"></div>
+
+  <script>
+    let sentence = "The movie is not that bad, I like it";
+
+    let wordNot = sentence.indexOf("not");
+    let wordBad = sentence.indexOf("bad");
+
+    let result;
+    if(wordNot !== -1 && wordBad !== -1 && wordBad > wordNot){
+      result = sentence.slice(0, wordNot) + "good" + sentence.slice(wordBad + 3);
+    } else {
+      result = sentence;
+    }
+
+    console.log(result);
+  </script>
+</body>
+</html>

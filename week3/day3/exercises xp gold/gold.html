@@ -1,0 +1,111 @@
+<!--exercise1-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Music</title>
+</head>
+<body>
+
+<select id="genres">
+  <option value="rock">Rock</option>
+  <option value="blues" selected>Blues</option>
+</select>
+
+<p id="output"></p>
+
+<script>
+    const select = document.getElementById("genres");
+    const output = document.getElementById("output");
+    output.textContent = "Selected: " + select.value;
+    const option = document.createElement("option");
+    option.value = "classic";
+    option.text = "Classic";
+    option.selected = true; 
+    select.appendChild(option);
+    output.textContent = "Selected: " + select.value;
+ 
+</script>
+</body>
+</html>
+<!--exercise2-->
+<!DOCTYPE html>
+<html>      
+<head>
+    <title>delete colors</title>
+</head>
+<body>
+<form>
+    <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+    </select>
+    <input type="button" value="Select and Remove">
+</form>
+<script>
+    const button = document.getElementById("removeBtn");
+    button.addEventListener("click", removecolor);
+
+    function removecolor() {
+        const select = document.getElementById("colorSelect");
+        if (select.selectedIndex >= 0) {
+            select.remove(select.selectedIndex);
+        }
+    }
+</script>
+</body>
+</html> 
+<!--exercise3-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping List</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        let shoppingList = [];
+        const root = document.getElementById("root");
+
+        const input = document.createElement("input");
+        input.placeholder = "Enter item";
+
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.textContent = "AddItem";
+
+        const clearButton = document.createElement("button");
+        clearButton.type = "button";
+        clearButton.textContent = "ClearAll";
+
+        const ul = document.createElement("ul");
+
+        root.appendChild(input);
+        root.appendChild(addButton);
+        root.appendChild(clearButton);
+        root.appendChild(ul);
+
+        function addItem() {
+            const value = input.value.trim();
+            if (value) {
+                shoppingList.push(value);
+                const li = document.createElement("li");
+                li.textContent = value;
+                ul.appendChild(li);
+                input.value = "";
+            }
+        }
+
+        function clearAll() {
+            shoppingList = [];
+            ul.innerHTML = "";
+        }
+
+        addButton.addEventListener("click", addItem);
+        clearButton.addEventListener("click", clearAll);
+    </script>
+</body>
+</html>
+

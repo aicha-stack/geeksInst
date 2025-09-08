@@ -1,0 +1,164 @@
+<!--exercise1-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1</title>
+</head>
+<body>
+  <script>
+    const randomNum = Math.floor(Math.random() * 100) + 1;
+    console.log("Random number:", randomNum);
+
+    for (let i = 0; i <= randomNum; i++) {
+      if (i % 2 === 0) {
+        console.log(i);
+      }
+    }
+  </script>
+</body>
+</html>
+<!--exercise2-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2</title>
+</head>
+<body>
+  <script>
+    function capitalize(str) {
+      let even = "";
+      let odd = "";
+      for (let i = 0; i < str.length; i++) {
+        if (i % 2 === 0) {
+          even += str[i].toUpperCase();
+          odd += str[i];
+        } else {
+          even += str[i];
+          odd += str[i].toUpperCase();
+        }
+      }
+      return [even, odd];
+    }
+
+    console.log(capitalize("abcdef"));
+    console.log(capitalize("javascript"));
+  </script>
+</body>
+</html>
+<!--exercise3-->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3</title>
+</head>
+<body>
+  <script>
+    function isPalindrome(str) {
+      str = str.toLowerCase();
+      return str === str.split("").reverse().join("");
+    }
+
+    console.log(isPalindrome("madam"));
+    console.log(isPalindrome("bob"));
+    console.log(isPalindrome("kayak"));
+    console.log(isPalindrome("hello"));
+  </script>
+</body>
+</html>
+<!--exercise4-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4</title>
+</head>
+<body>
+  <script>
+    function biggestNumberInArray(arrayNumber) {
+      let max = 0;
+      for (let val of arrayNumber) {
+        if (typeof val === "number" && val > max) {
+          max = val;
+        }
+      }
+      return max;
+    }
+
+    const array = [-1, 0, 3, 100, 99, 2, 99];
+    const array2 = ["a", 3, 4, 2];
+    const array3 = [];
+
+    console.log(biggestNumberInArray(array));
+    console.log(biggestNumberInArray(array2));
+    console.log(biggestNumberInArray(array3));
+  </script>
+</body>
+</html>
+
+<!--exercise5-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 5</title>
+</head>
+<body>
+  <script>
+    function uniqueElements(arr) {
+      return [...new Set(arr)];
+    }
+
+    const list1 = [1,2,3,3,3,3,4,5];
+    const list2 = [1,2,3,3,3,3,4,5];
+
+    console.log(uniqueElements(list1));
+    console.log(uniqueElements(list2));
+  </script>
+</body>
+</html>
+<!-- exercise 6 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calendar</title>
+  <style>
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid black; width: 40px; height: 40px; text-align: center; }
+  </style>
+</head>
+<body>
+  <script>
+    function createCalendar(year, month) {
+      const table = document.createElement("table");
+      const days = ["MO","TU","WE","TH","FR","SA","SU"];
+      const header = document.createElement("tr");
+      days.forEach(d => { const th = document.createElement("th"); th.textContent = d; header.appendChild(th); });
+      table.appendChild(header);
+
+      const firstDay = new Date(year, month-1, 1);
+      const lastDate = new Date(year, month, 0).getDate();
+      let row = document.createElement("tr");
+      let startDay = (firstDay.getDay()+6)%7;
+
+      for (let i=0;i<startDay;i++) row.appendChild(document.createElement("td"));
+      for (let d=1; d<=lastDate; d++) {
+        const td = document.createElement("td"); td.textContent=d; row.appendChild(td);
+        if ((startDay+d)%7===0 || d===lastDate) { table.appendChild(row); row=document.createElement("tr"); }
+      }
+
+      document.body.appendChild(table);
+    }
+
+    createCalendar(2025, 9);
+  </script>
+</body>
+</html>
+
+
+
+

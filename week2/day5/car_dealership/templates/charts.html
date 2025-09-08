@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Charts{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Dashboard Charts</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Cars per Model -->
+        <div class="bg-white rounded-2xl shadow p-6">
+            <h3 class="text-xl font-semibold text-pink-600 mb-4">Cars per Model</h3>
+            <canvas id="carsChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- Sales per Salesperson -->
+        <div class="bg-white rounded-2xl shadow p-6">
+            <h3 class="text-xl font-semibold text-blue-600 mb-4">Sales per Salesperson</h3>
+            <canvas id="salespersonChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- Customers Count -->
+        <div class="bg-white rounded-2xl shadow p-6">
+            <h3 class="text-xl font-semibold text-yellow-500 mb-4">Customers Count</h3>
+            <canvas id="customersChart" class="w-full h-72"></canvas>
+        </div>
+
+        <!-- Sales per Year -->
+        <div class="bg-white rounded-2xl shadow p-6">
+            <h3 class="text-xl font-semibold text-red-500 mb-4">Sales per Year</h3>
+            <canvas id="salesYearChart" class="w-full h-72"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Charger Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const carsData = {{ data.cars|tojson|safe }};
+const salesData = {{ data.salespeople|tojson|safe }};
+const customersData = {{ data.customers|tojson|safe }};
+const yearData = {{ data.sales_year|tojson|safe }};
+
+// Cars per Model
+new Chart(document.getElementById('carsChart'), {
+    type: 'doughnut',
+    data: {
+        labels: carsData.labels,
+        datasets: [{
+            data: carsData.values,
+            backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40']
+        }]
+    }
+});
+
+// Sales per Salesperson
+new Chart(document.getElementById('salespersonChart'), {
+    type: 'bar',
+    data: {
+        labels: salesData.labels,
+        datasets: [{
+            label: 'Sales Count',
+            data: salesData.values,
+            backgroundColor: '#36A2EB'
+        }]
+    }
+});
+
+// Customers Count
+new Chart(document.getElementById('customersChart'), {
+    type: 'doughnut',
+    data: {
+        labels: customersData.labels,
+        datasets: [{
+            data: customersData.values,
+            backgroundColor: ['#FFCE56']
+        }]
+    }
+});
+
+// Sales per Year
+new Chart(document.getElementById('salesYearChart'), {
+    type: 'line',
+    data: {
+        labels: yearData.labels,
+        datasets: [{
+            label: 'Sales per Year',
+            data: yearData.values,
+            borderColor: '#FF6384',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            fill: true
+        }]
+    }
+});
+</script>
+{% endblock %}

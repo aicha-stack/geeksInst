@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block title %}Events{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold text-brown-800 mb-4">Upcoming Events</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {% for event in events %}
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="text-lg font-bold text-pink-600">{{ event[1] }}</h3>
+    <p class="text-brown-700">{{ event[2] }} | {{ event[3] }}</p>
+    <p class="text-gray-600 mt-2">{{ event[4] }}</p>
+    <div class="mt-4 flex justify-between">
+      <a href="/details/{{ event[0] }}" class="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-500">Details</a>
+      <a href="/edit/{{ event[0] }}" class="bg-brown-500 text-pink-100 px-4 py-2 rounded hover:bg-brown-600">Edit</a>
+    </div>
+  </div>
+  {% else %}
+  <p class="text-gray-600">No events found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+

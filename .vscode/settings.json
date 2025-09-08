@@ -1,0 +1,25 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "car_dealership",
+            "database": "car_dealership",
+            "username": "postgres",
+            "password": "aicha1234"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "restaurant_db",
+            "database": "restaurant_db",
+            "username": "postgres",
+            "password": "aicha1234"
+        }
+    ],
+    "liveServer.settings.port": 5501
+}

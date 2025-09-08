@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Statistics{% endblock %}
+{% block content %}
+<h2 class="text-xl font-bold text-brown-800 mb-4">Event Statistics</h2>
+<table class="bg-white rounded shadow w-full">
+  <thead class="bg-pink-200">
+    <tr>
+      <th class="p-2">Organizer ID</th>
+      <th class="p-2">Number of Events</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stat in stats %}
+    <tr class="border-t">
+      <td class="p-2 text-brown-700">{{ stat[0] }}</td>
+      <td class="p-2 text-pink-600">{{ stat[1] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

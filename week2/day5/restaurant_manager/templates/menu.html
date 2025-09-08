@@ -1,0 +1,53 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-50 font-sans">
+<nav class="bg-pink-200 p-4 flex justify-between items-center">
+  <h1 class="text-2xl font-bold text-white">Restaurant Menu</h1>
+  <a href="/add" class="bg-white text-pink-500 px-4 py-2 rounded shadow hover:bg-pink-100">Add Item</a>
+</nav>
+
+<div class="container mx-auto mt-8">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <p class="text-{{ category }}-600">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <h2 class="text-xl font-semibold text-pink-600 mb-4">Menu Items</h2>
+  <table class="min-w-full bg-white rounded shadow">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">ID</th>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Price</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr class="border-t">
+        <td class="px-4 py-2">{{ item[0] }}</td>
+        <td class="px-4 py-2">{{ item[1] }}</td>
+        <td class="px-4 py-2">${{ item[2] }}</td>
+        <td class="px-4 py-2 flex gap-2">
+          <form action="/delete/{{ item[0] }}" method="post">
+            <button class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+          </form>
+          <a href="/update/{{ item[0] }}" class="bg-blue-500 text-white px-2 py-1 rounded">Update</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+
