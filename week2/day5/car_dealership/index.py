@@ -31,12 +31,12 @@ def connect_to_db():
         return None
 
 #image 
-def get_random_car_image(model=None):
-    if model:
-        query = model.replace(' ', '%20') + ",car"
-    else:
-        query = "car"
-    return f"https://picsum.photos/200/300/?random={query}"
+# def get_random_car_image(model=None):
+#     if model:
+#         query = model.replace(' ', '%20') + ",car"
+#     else:
+#         query = "car"
+#     return f"https://picsum.photos/200/300/?random={query}"
 
 
 # Home 
@@ -81,8 +81,16 @@ def index():
                 'year': row[2],
                 'price': row[3],
                 'description': row[4],
-                'image': get_random_car_image(row[1])
+                'image_url': row[5]
             })
+            # print(cars.append({
+            #     'id': row[0],
+            #     'model': row[1],
+            #     'year': row[2],
+            #     'price': row[3],
+            #     'description': row[4],
+            #     'image_url': row[5],
+            # }))
 
     total_pages = (total + limit - 1) // limit
     return render_template('index.html', cars=cars, search_query=search_query, page=page, total_pages=total_pages)
@@ -104,7 +112,7 @@ def car_detail(car_id):
                 'year': row[2],
                 'price': row[3],
                 'description': row[4],
-                'image': get_random_car_image(row[1])
+                'image_url': row[5]
             }
     return render_template('details.html', car=car)
 
@@ -116,6 +124,7 @@ def create():
         year = request.form.get('year')
         price = request.form.get('price')
         description = request.form.get('description')
+        imageurl = request.form.get('image_url')
 
         if not model or not year or not price or not description:
             flash("All fields are required!", "red")
@@ -125,8 +134,8 @@ def create():
         if conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO cars (model, year, price, description) VALUES (%s,%s,%s,%s)",
-                (model, year, price, description)
+                "INSERT INTO cars (model, year, price, description, image_url) VALUES (%s,%s,%s,%s,%s)",
+                (model, year, price, description, imageurl)
             )
             conn.commit()
             conn.close()
@@ -154,16 +163,17 @@ def edit(car_id):
                 'year': row[2],
                 'price': row[3],
                 'description': row[4],
-                'image': get_random_car_image(row[1])
+                'image_url': row[5]
             }
         if request.method == 'POST':
             model = request.form.get('model')
             year = request.form.get('year')
             price = request.form.get('price')
             description = request.form.get('description')
+            imageurl = request.form.get('image_url')
             cursor.execute(
-                "UPDATE cars SET model=%s, year=%s, price=%s, description=%s WHERE id=%s",
-                (model, year, price, description, car_id)
+                "UPDATE cars SET model=%s, year=%s, price=%s, description=%s, image_url=%s WHERE id=%s",
+                (model, year, price, description,imageurl, car_id)
             )
             conn.commit()
             conn.close()
@@ -201,7 +211,7 @@ def car_details(car_id):
                 'year': row[2],
                 'price': row[3],
                 'description': row[4],
-                'image': get_random_car_image(row[1])
+                'image_url': row[5]
             }
     return render_template("details.html", car=car)
 

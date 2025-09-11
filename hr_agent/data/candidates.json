@@ -1,0 +1,134 @@
+[
+  {
+    "firstName": "Amina",
+    "lastName": "El Idrissi",
+    "email": "amina@example.com",
+    "location": "Casablanca",
+    "experienceYears": 1,
+    "skills": ["React", "JS", "HTML"],
+    "availabilityDate": "2025-10-01",
+    "stage": "SOURCED",
+    "notes": "Portfolio: …"
+  },
+  {
+    "firstName": "Youssef",
+    "lastName": "Bennani",
+    "email": "youssef@example.com",
+    "location": "Casablanca",
+    "experienceYears": 2,
+    "skills": ["JS", "React", "Git"],
+    "availabilityDate": "2025-09-25",
+    "stage": "SCREEN",
+    "notes": ""
+  },
+  {
+    "firstName": "Sofia",
+    "lastName": "El Fassi",
+    "email": "sofia@example.com",
+    "location": "Rabat",
+    "experienceYears": 0,
+    "skills": ["React", "HTML", "CSS"],
+    "availabilityDate": "2025-09-20",
+    "stage": "SOURCED",
+    "notes": ""
+  },
+  {
+    "firstName": "Karim",
+    "lastName": "Haddad",
+    "email": "karim@example.com",
+    "location": "Casablanca",
+    "experienceYears": 1,
+    "skills": ["Python", "JS", "SQL"],
+    "availabilityDate": "2025-10-05",
+    "stage": "INTERVIEW",
+    "notes": ""
+  },
+  {
+    "firstName": "Lina",
+    "lastName": "Chakiri",
+    "email": "lina@example.com",
+    "location": "Casablanca",
+    "experienceYears": 2,
+    "skills": ["React", "JS", "Git"],
+    "availabilityDate": "2025-09-28",
+    "stage": "SOURCED",
+    "notes": ""
+  },
+  {
+    "firstName": "Rachid",
+    "lastName": "El Amrani",
+    "email": "rachid@example.com",
+    "location": "Fes",
+    "experienceYears": 1,
+    "skills": ["JS", "HTML", "CSS"],
+    "availabilityDate": "2025-10-10",
+    "stage": "SCREEN",
+    "notes": ""
+  },
+  {
+    "firstName": "Sara",
+    "lastName": "Boukhris",
+    "email": "sara@example.com",
+    "location": "Marrakech",
+    "experienceYears": 0,
+    "skills": ["React", "JS", "HTML"],
+    "availabilityDate": "2025-09-18",
+    "stage": "SOURCED",
+    "notes": ""
+  },
+  {
+    "firstName": "Omar",
+    "lastName": "El Idrissi",
+    "email": "omar@example.com",
+    "location": "Casablanca",
+    "experienceYears": 2,
+    "skills": ["React", "JS", "Git"],
+    "availabilityDate": "2025-09-22",
+    "stage": "INTERVIEW",
+    "notes": ""
+  },
+  {
+    "firstName": "Nadia",
+    "lastName": "El Khatib",
+    "email": "nadia@example.com",
+    "location": "Rabat",
+    "experienceYears": 1,
+    "skills": ["Python", "SQL", "React"],
+    "availabilityDate": "2025-10-01",
+    "stage": "SOURCED",
+    "notes": ""
+  },
+  {
+    "firstName": "Yassine",
+    "lastName": "Benali",
+    "email": "yassine@example.com",
+    "location": "Casablanca",
+    "experienceYears": 1,
+    "skills": ["React", "JS", "CSS"],
+    "availabilityDate": "2025-09-27",
+    "stage": "SCREEN",
+    "notes": ""
+  },
+  {
+    "firstName": "Imane",
+    "lastName": "El Othmani",
+    "email": "imane@example.com",
+    "location": "Fes",
+    "experienceYears": 0,
+    "skills": ["HTML", "CSS", "JS"],
+    "availabilityDate": "2025-09-19",
+    "stage": "SOURCED",
+    "notes": ""
+  },
+  {
+    "firstName": "Ayoub",
+    "lastName": "Mansouri",
+    "email": "ayoub@example.com",
+    "location": "Casablanca",
+    "experienceYears": 2,
+    "skills": ["React", "JS", "Git"],
+    "availabilityDate": "2025-09-26",
+    "stage": "SOURCED",
+    "notes": ""
+  }
+]

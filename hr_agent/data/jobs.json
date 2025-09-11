@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Frontend Intern",
+    "location": "Casablanca",
+    "skillsRequired": ["React", "JS", "Git"],
+    "jdSnippet": "We build UI with React and follow Git workflows."
+  },
+  {
+    "title": "Backend Intern",
+    "location": "Rabat",
+    "skillsRequired": ["Python", "SQL", "Git"],
+    "jdSnippet": "Work on backend APIs using Python and SQL."
+  },
+  {
+    "title": "Fullstack Intern",
+    "location": "Casablanca",
+    "skillsRequired": ["React", "Python", "JS"],
+    "jdSnippet": "Develop fullstack features combining frontend and backend."
+  }
+]

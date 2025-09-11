@@ -1,8 +1,5 @@
-INSERT INTO cars (id, model, year, price, description)
-VALUES (
-    id:integer,
-    'model:character varying',
-    year:integer,
-    price:numeric,
-    'description:text'
-  );
+
+ALTER TABLE cars
+ADD COLUMN image_url TEXT;
+
+SELECT * FROM cars;
