@@ -1,4 +1,4 @@
-# HR Agent - CLI Demo
+# HR Agent 
 
 ## Description
 This is a **small HR Agent** project that helps you:  
@@ -7,7 +7,6 @@ This is a **small HR Agent** project that helps you:
 - Draft outreach emails (text + HTML preview)  
 - View analytics for the recruitment pipeline and top skills
 
-Everything works **locally**, no API or token required.
 
 ---
 
