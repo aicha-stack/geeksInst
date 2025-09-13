@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercises HTML , JSON</title>
+</head>
+<body>
+  <h1>🌟 Exercise 1 </h1>
+  <form action="" method="GET">
+    <label for="name1">Name:</label>
+    <input type="text" id="name1" name="username"><br><br>
+
+    <label for="message1">Message:</label><br>
+    <textarea id="message1" name="usermessage" rows="4" cols="30"></textarea><br><br>
+
+    <input type="submit" value="Send (GET)">
+  </form>
+
+  <hr>
+
+  <h1> Exercise 2 </h1>
+  <form action="" method="POST">
+    <label for="name2">Name:</label>
+    <input type="text" id="name2" name="username"><br><br>
+
+    <label for="message2">Message:</label><br>
+    <textarea id="message2" name="usermessage" rows="4" cols="30"></textarea><br><br>
+
+    <input type="submit" value="Send (POST)">
+  </form>
+
+  <hr>
+
+  <h1> Exercise 3 </h1>
+
+  <script>
+ 
+    const marioGame = {
+      detail : "An amazing game!",
+      characters : {
+          mario : {
+            description:"Small and jumpy. Likes princesses.",
+            height: 10,
+            weight: 3,
+            speed: 12,
+          },
+          bowser : {
+            description: "Big and green, Hates princesses.",
+            height: 16,
+            weight: 6,
+            speed: 4,
+          },
+          princessPeach : {
+            description: "Beautiful princess.",
+            height: 12,
+            weight: 2,
+            speed: 2,
+          }
+      },
+    };
+
+
+    const jsonMario = JSON.stringify(marioGame);
+    console.log("JSON (compact):", jsonMario);
+    const prettyJsonMario = JSON.stringify(marioGame, null, 2);
+    console.log("JSON (pretty):\n", prettyJsonMario);
+
+  
+    debugger; 
+  </script>
+</body>
+</html>

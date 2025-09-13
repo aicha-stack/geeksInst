@@ -1,0 +1,51 @@
+<!-- ====partr 1===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Page</title>
+</head>
+<body>
+  <h2>Form Example</h2>
+
+  <form action="display.html" method="GET">
+    <label for="name">First Name:</label>
+    <input type="text" id="name" name="firstname" required><br><br>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required><br><br>
+
+    <input type="submit" value="Send">
+  </form>
+</body>
+</html>
+
+<!-- part2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Display Page</title>
+</head>
+<body>
+  <h2>Received Data</h2>
+  <section id="output"></section>
+
+  <script>
+   
+    const params = new URLSearchParams(window.location.search);
+
+    const firstname = params.get("firstname");
+    const lastname = params.get("lastname");
+
+  
+    const output = document.getElementById("output");
+
+    if (firstname && lastname) {
+      output.innerHTML = `<p>Hello <strong>${firstname} ${lastname}</strong>, your data has been received!</p>`;
+    } else {
+      output.innerHTML = "<p>No data received.</p>";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>allTruthy Simple</title>
+</head>
+<body>
+  <h3>Check allTruthy</h3>
+  <input id="vals" placeholder="Enter values separated by comma">
+  <button id="check">Check</button>
+  <p id="res"></p>
+
+  <script>
+    function allTruthy(...args) {
+      return args.every(Boolean);
+    }
+
+    document.getElementById("check").addEventListener("click", () => {
+      const input = document.getElementById("vals").value.split(",").map(v => {
+        v = v.trim();
+        if(v === "true") return true;
+        if(v === "false") return false;
+        if(!isNaN(v) && v !== "") return Number(v);
+        return v;
+      });
+      document.getElementById("res").textContent = "Result: " + allTruthy(...input);
+    });
+  </script>
+</body>
+</html>
