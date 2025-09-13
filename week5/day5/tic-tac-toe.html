@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe with AICHA-AI</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #f9c5d1, #fbc4f0);
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #d6336c;
+      text-shadow: 2px 2px 5px rgba(255,255,255,0.6);
+      font-size: 3em;
+    }
+    #controls {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 16px;
+      margin: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      background: #ed4aa1;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(238, 149, 149, 0.1);
+    }
+    button:hover {
+      transform: scale(1.1);
+      background: #c0577e;
+    }
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 12px;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background: #ffe4f0;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .cell:hover {
+      background: #ffcce4;
+      transform: scale(1.05);
+    }
+    .X { color: #d6336c; }
+    .O { color: #9b59b6; }
+    #message {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #7722b3;
+      text-shadow: 1px 1px 3px rgba(255,255,255,0.7);
+    }
+    #restart {
+      margin-top: 20px;
+      background: #ff6fa3;
+    }
+    #restart:hover {
+      background: #ff4c87;
+    }
+  </style>
+</head>
+<body>
+  <h1> Tic Tac Toe 💖</h1>
+  <div id="controls">
+    Choose symbol: 
+    <button id="chooseX">X</button>
+    <button id="chooseO">O</button>
+    <button id="easy">Easy</button>
+    <button id="hard">Hard</button>
+  </div>
+
+  <div id="board"></div>
+  <div id="message"></div>
+  <button id="restart" style="display:none;">Restart Game</button>
+
+  <script>
+    const boardDiv = document.getElementById("board");
+    const messageDiv = document.getElementById("message");
+    const restartBtn = document.getElementById("restart");
+    const winCombos = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+
+    let board = Array(9).fill(null);
+    let playerSymbol = null;
+    let aiSymbol = null;
+    let gameOver = false;
+    let aiMode = "easy";
+
+    function createBoard() {
+      boardDiv.innerHTML = "";
+      board.forEach((cell, idx) => {
+        const div = document.createElement("div");
+        div.className = "cell";
+        div.id = idx;
+        if(cell) div.classList.add(cell);
+        div.textContent = cell ? cell : "";
+        div.addEventListener("click", () => playerMove(idx));
+        boardDiv.appendChild(div);
+      });
+    }
+
+    function playerMove(idx) {
+      if(gameOver || board[idx]) return;
+      board[idx] = playerSymbol;
+      updateBoard();
+      if(checkWinner(board, playerSymbol)) endGame("You win! 💖");
+      else if(board.every(c=>c)) endGame("Tie game 😅");
+      else aiMove();
+    }
+
+    function aiMove() {
+      let move;
+      const empty = board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
+      if(aiMode==="easy"){
+        move = empty[Math.floor(Math.random()*empty.length)];
+      } else {
+        move = findBestMove();
+      }
+      board[move] = aiSymbol;
+      updateBoard();
+      if(checkWinner(board, aiSymbol)) endGame("AI wins 😢");
+      else if(board.every(c=>c)) endGame("Tie game 😅");
+    }
+
+    function findBestMove() {
+      const empty = board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
+      for(let i of empty){
+        board[i]=aiSymbol; if(checkWinner(board,aiSymbol)){board[i]=null; return i;} board[i]=null;
+      }
+      for(let i of empty){
+        board[i]=playerSymbol; if(checkWinner(board,playerSymbol)){board[i]=null; return i;} board[i]=null;
+      }
+      return empty[Math.floor(Math.random()*empty.length)];
+    }
+
+    function checkWinner(b,symbol){
+      return winCombos.some(combo=>combo.every(i=>b[i]===symbol));
+    }
+
+    function updateBoard(){
+      board.forEach((v,i)=>{
+        const cellDiv = document.getElementById(i);
+        cellDiv.textContent = v ? v : "";
+        cellDiv.className = "cell";
+        if(v) cellDiv.classList.add(v);
+      });
+    }
+
+    function endGame(msg){
+      gameOver = true;
+      messageDiv.textContent = msg;
+      restartBtn.style.display = "inline-block";
+    }
+
+    document.getElementById("chooseX").addEventListener("click", ()=>{
+      playerSymbol="X"; aiSymbol="O"; resetGame();
+    });
+    document.getElementById("chooseO").addEventListener("click", ()=>{
+      playerSymbol="O"; aiSymbol="X"; resetGame();
+    });
+    document.getElementById("easy").addEventListener("click", ()=>{ aiMode="easy"; resetGame(); });
+    document.getElementById("hard").addEventListener("click", ()=>{ aiMode="hard"; resetGame(); });
+    restartBtn.addEventListener("click", resetGame);
+
+    function resetGame(){
+      board = Array(9).fill(null);
+      gameOver = false;
+      messageDiv.textContent = "";
+      restartBtn.style.display = "none";
+      createBoard();
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
