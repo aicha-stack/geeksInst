@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giphy API #3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #gif-container img {
+      width: 200px;
+      margin: 10px;
+    }
+    button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    input {
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Search for GIFs 🎬</h2>
+
+  <form id="gif-form">
+    <input type="text" id="category" placeholder="Enter category (e.g., cat, dog)" required>
+    <button type="submit">Search GIFs</button>
+  </form>
+
+  <button id="delete-gifs">Delete All GIFs</button>
+
+  <div id="gif-container"></div>
+
+  <script>
+    const API_KEY = "hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My";
+    const form = document.getElementById("gif-form");
+    const gifContainer = document.getElementById("gif-container");
+    const deleteBtn = document.getElementById("delete-gifs");
+
+  
+    async function fetchGifs(category) {
+      const url = `https://api.giphy.com/v1/gifs/search?q=${category}&api_key=${API_KEY}&limit=10&rating=g`;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        displayGifs(data.data);
+
+      } catch (error) {
+        console.error("Error fetching GIFs:", error);
+        alert("Oops! Something went wrong while fetching GIFs.");
+      }
+    }
+
+    
+    function displayGifs(gifs) {
+      gifs.forEach(gif => {
+        const img = document.createElement("img");
+        img.src = gif.images.original.url;
+        img.alt = "GIF";
+        gifContainer.appendChild(img);
+      });
+    }
+
+    
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const category = document.getElementById("category").value.trim();
+      if (category) {
+        fetchGifs(category);
+        form.reset();
+      }
+    });
+
+  
+    deleteBtn.addEventListener("click", () => {
+      gifContainer.innerHTML = ""; 
+    });
+  </script>
+
+</body>
+</html>
+<!-- exercise2 -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise 2: Analyze #4</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
+  h1 { color: #003366; }
+  button { padding: 10px 15px; margin-top: 10px; cursor: pointer; background-color: #003366; color: #fff; border: none; border-radius: 4px; }
+  button:hover { background-color: #0055a5; }
+</style>
+</head>
+<body>
+
+<h1>Exercise 2: Analyze #4</h1>
+
+
+<script>
+
+function resolveAfter2Seconds() {
+    console.log("starting slow promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("slow");
+            console.log("slow promise is done");
+        }, 2000);
+    });
+}
+
+function resolveAfter1Second() {
+    console.log("starting fast promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("fast");
+            console.log("fast promise is done");
+        }, 1000);
+    });
+}
+
+
+function concurrentPromise() {
+    console.log('==CONCURRENT START with Promise.all==');
+    return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()])
+        .then(messages => {
+            console.log(messages[0]); 
+            console.log(messages[1]); 
+        });
+}
+
+
+document.getElementById("run-exercise2").addEventListener("click", () => {
+   
+    setTimeout(concurrentPromise, 1000);
+});
+</script>
+
+</body>
+</html>
+<!-- exercise3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise 3: Analyze #5</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
+  h1 { color: #003366; }
+  button { padding: 10px 15px; margin-top: 10px; cursor: pointer; background-color: #003366; color: #fff; border: none; border-radius: 4px; }
+  button:hover { background-color: #0055a5; }
+</style>
+</head>
+<body>
+
+<h1>Exercise 3: Analyze #5</h1>
+
+
+<script>
+
+function resolveAfter2Seconds() {
+    console.log("starting slow promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("slow");
+            console.log("slow promise is done");
+        }, 2000);
+    });
+}
+
+function resolveAfter1Second() {
+    console.log("starting fast promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("fast");
+            console.log("fast promise is done");
+        }, 1000);
+    });
+}
+
+
+async function parallel() {
+    console.log('==PARALLEL with await Promise.all==');
+    await Promise.all([
+        (async () => console.log(await resolveAfter2Seconds()))(),
+        (async () => console.log(await resolveAfter1Second()))()
+    ]);
+}
+
+document.getElementById("run-exercise3").addEventListener("click", () => {
+    
+    setTimeout(parallel, 5000);
+});
+</script>
+
+</body>
+</html>
+<!-- exercise 4 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise 4: Analyze #6</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5; }
+  h1 { color: #003366; }
+  button { padding: 10px 15px; margin-top: 10px; cursor: pointer; background-color: #003366; color: #fff; border: none; border-radius: 4px; }
+  button:hover { background-color: #0055a5; }
+</style>
+</head>
+<body>
+
+<h1>Exercise 4: Analyze #6</h1>
+
+<script>
+function resolveAfter2Seconds() {
+    console.log("starting slow promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("slow");
+            console.log("slow promise is done");
+        }, 2000);
+    });
+}
+
+function resolveAfter1Second() {
+    console.log("starting fast promise");
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("fast");
+            console.log("fast promise is done");
+        }, 1000);
+    });
+}
+function parallelPromise() {
+    console.log('==PARALLEL with Promise.then==');
+    resolveAfter2Seconds().then(message => console.log(message));
+    resolveAfter1Second().then(message => console.log(message));
+}
+
+document.getElementById("run-exercise4").addEventListener("click", () => {
+    setTimeout(parallelPromise, 13000);
+});
+</script>
+
+</body>
+</html>

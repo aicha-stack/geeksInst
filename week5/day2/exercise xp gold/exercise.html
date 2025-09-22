@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giphy Sticker Example</title>
+</head>
+<body>
+  <h2>Random Sticker from Giphy 🎉</h2>
+  <div id="sticker-container"></div>
+
+  <script>
+    const url = "https://api.giphy.com/v1/stickers/search?q=funny&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My&limit=25&rating=g";
+
+    async function fetchSticker() {
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+       
+        const stickers = data.data;
+        const randomIndex = Math.floor(Math.random() * stickers.length);
+        const stickerUrl = stickers[randomIndex].images.original.url;
+
+       
+        const img = document.createElement("img");
+        img.src = stickerUrl;
+        img.alt = "Random Sticker";
+        document.getElementById("sticker-container").appendChild(img);
+
+      } catch (error) {
+        console.error("Error fetching Sticker:", error);
+      }
+    }
+
+    fetchSticker();
+  </script>
+</body>
+</html>
+<!-- exercise2 -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2 - Analyze</title>
+</head>
+<body>
+  <h2>Open the Console to see the result 🚀</h2>
+
+  <script>
+    let resolveAfter2Seconds = function () {
+      console.log("starting slow promise");
+      return new Promise(resolve => {
+        setTimeout(function () {
+          resolve("slow");
+          console.log("slow promise is done");
+        }, 2000);
+      });
+    };
+
+    let resolveAfter1Second = function () {
+      console.log("starting fast promise");
+      return new Promise(resolve => {
+        setTimeout(function () {
+          resolve("fast");
+          console.log("fast promise is done");
+        }, 1000);
+      });
+    };
+
+    let sequentialStart = async function () {
+      console.log('==SEQUENTIAL START==');
+      const slow = await resolveAfter2Seconds();
+      console.log(slow);
+      const fast = await resolveAfter1Second();
+      console.log(fast);
+    };
+
+    sequentialStart();
+  </script>
+</body>
+</html>
+<!-- exercise3 -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 - Analyze</title>
+</head>
+<body>
+  <h2>Open the Console to see the result 🚀</h2>
+
+  <script>
+    let resolveAfter2Seconds1 = function () {
+      console.log("starting slow promise");
+      return new Promise(resolve => {
+        setTimeout(function () {
+          resolve("slow");
+          console.log("slow promise is done");
+        }, 2000);
+      });
+    };
+
+    let resolveAfter1Second1 = function () {
+      console.log("starting fast promise");
+      return new Promise(resolve => {
+        setTimeout(function () {
+          resolve("fast");
+          console.log("fast promise is done");
+        }, 1000);
+      });
+    };
+
+    let concurrentStart = async function () {
+      console.log('==CONCURRENT START with await==');
+      const slow = resolveAfter2Seconds();
+      const fast = resolveAfter1Second();
+
+      console.log(await slow);
+      console.log(await fast);
+    };
+
+    setTimeout(concurrentStart, 4000);
+  </script>
+</body>
+</html>
+<!-- exercise 4 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4 - Fetch Async/Await</title>
+</head>
+<body>
+  <h2>Open the Console to see the result 🚀</h2>
+
+  <script>
+    const urls = [
+      "https://jsonplaceholder.typicode.com/users",
+      "https://jsonplaceholder.typicode.com/posts",
+      "https://jsonplaceholder.typicode.com/albums"
+    ];
+
+    const getData = async function() {
+      try {
+        const results = await Promise.all(
+          urls.map(async (url) => {
+            const resp = await fetch(url);       
+            if (!resp.ok) {
+              throw new Error(`HTTP error! status: ${resp.status}`);
+            }
+            const data = await resp.json();      
+          })
+        );
+
+        const [users, posts, albums] = results;
+        console.log('users', users);
+        console.log('posts', posts);
+        console.log('albums', albums);
+
+      } catch (error) {
+        console.log('ooooooops', error);
+      }
+    };
+
+    getData();
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random Giphy Fetch</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+  h1 { color: #e04cc5; }
+  form { margin-bottom: 20px; }
+  input[type=text] { padding: 8px; width: 200px; border: 1px solid #ccc; border-radius: 4px; }
+  button { padding: 8px 12px; margin-left: 5px; cursor: pointer; border: none; border-radius: 4px; background: #e738dc; color: #fff; }
+  button:hover { background: #b120f5; }
+  .gif-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+  .gif-card { position: relative; display: flex; flex-direction: column; align-items: center; border: 1px solid #ccc; padding: 10px; border-radius: 6px; background: #fff; }
+  .gif-card img { max-width: 200px; border-radius: 4px; }
+  .delete-btn { margin-top: 5px; background: #a50000; }
+  .delete-btn:hover { background: #b113c6; }
+</style>
+</head>
+<body>
+
+<h1>Random Giphy Fetch</h1>
+
+<form id="gifForm">
+  <input type="text" id="searchInput" placeholder="Enter category..." required />
+  <button type="submit">Fetch GIF</button>
+  <button type="button" id="deleteAll">DELETE ALL</button>
+</form>
+
+<div class="gif-container" id="gifContainer"></div>
+
+<script>
+const apiKey = "hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My";
+const form = document.getElementById("gifForm");
+const searchInput = document.getElementById("searchInput");
+const gifContainer = document.getElementById("gifContainer");
+const deleteAllBtn = document.getElementById("deleteAll");
+
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+    if (!query) return;
+
+    const url = `https://api.giphy.com/v1/gifs/random?tag=${encodeURIComponent(query)}&rating=g&api_key=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const data = await response.json();
+        const gifUrl = data.data.images?.downsized?.url;
+
+        if (gifUrl) {
+            const card = document.createElement("div");
+            card.classList.add("gif-card");
+
+            const img = document.createElement("img");
+            img.src = gifUrl;
+            img.alt = query;
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "DELETE";
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.addEventListener("click", () => card.remove());
+
+            card.appendChild(img);
+            card.appendChild(deleteBtn);
+            gifContainer.appendChild(card);
+
+            searchInput.value = "";
+        }
+    } catch (error) {
+        console.error("ooooooops", error);
+        alert("Failed to fetch GIF. Check console for details.");
+    }
+});
+
+
+deleteAllBtn.addEventListener("click", () => {
+    gifContainer.innerHTML = "";
+});
+</script>
+
+</body>
+</html>
