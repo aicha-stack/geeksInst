@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokedex App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <style>
+    body{font-family:Arial,sans-serif;background:#f2f2f2;text-align:center;margin:0;padding:20px}
+    .logo{width:250px;margin:10px auto;display:block}
+    .pokedex{position:relative;display:inline-block}
+    .pokedex img.device{width:450px}
+    .screen{position:absolute;top:70px;left:115px;width:220px;height:150px;background:#1a1a1a;color:#fff;border-radius:8px;overflow:auto;padding:8px;font-size:14px;text-align:center}
+    .pokemon{width:100px;height:100px}
+    .controls{margin-top:20px}
+    button{background:#ffcc00;border:none;padding:10px 15px;margin:5px;cursor:pointer;border-radius:8px;transition:.3s;font-weight:bold}
+    button:hover{background:#e6b800}
+    .loading{color:#fff;font-size:16px}
+    .error{color:#ff0000;font-weight:bold}
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="Pokémon Logo" class="logo">
+  <div class="pokedex">
+    <img src="9713819b-bb9e-4ea6-8bcb-fb81a048ae3f.png" alt="Pokedex Device" class="device">
+    <div id="display" class="screen">
+      <p class="loading">Press a button to start</p>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="prev">⬅ Prev</button>
+    <button id="random">🎲 Random</button>
+    <button id="next">Next ➡</button>
+  </div>
+
+  <script>
+    const display=document.getElementById("display");
+    const randomBtn=document.getElementById("random");
+    const prevBtn=document.getElementById("prev");
+    const nextBtn=document.getElementById("next");
+    let currentId=1;
+
+    async function fetchPokemon(id){
+      try{
+        display.innerHTML=`<p class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</p>`;
+        const res=await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        if(!res.ok)throw new Error();
+        const data=await res.json();
+        currentId=data.id;
+        const types=data.types.map(t=>t.type.name).join(", ");
+        display.innerHTML=`
+          <img src="${data.sprites.front_default}" alt="${data.name}" class="pokemon"><br>
+          <strong>${data.name}</strong><br>
+          ID: ${data.id}<br>
+          Height: ${data.height}<br>
+          Weight: ${data.weight}<br>
+          Type: ${types}
+        `;
+      }catch(e){
+        display.innerHTML=`<p class="error">Oh no! That Pokémon isn’t available…</p>`;
+      }
+    }
+
+    randomBtn.addEventListener("click",()=>{const id=Math.floor(Math.random()*898)+1;fetchPokemon(id)});
+    prevBtn.addEventListener("click",()=>{if(currentId>1)fetchPokemon(currentId-1)});
+    nextBtn.addEventListener("click",()=>{fetchPokemon(currentId+1)});
+  </script>
+</body>
+</html>

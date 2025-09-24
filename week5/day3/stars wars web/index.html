@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Star Wars Characters</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffb6e6 0%, #ffe6fa 100%);
+      color: #ff4fa7;
+      text-align: center;
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+ 
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: transparent;
+    }
+    
+    .star {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #ff69b4 60%, transparent 100%);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: sparkle 2s infinite;
+    }
+    .star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s;}
+    .star:nth-child(2) { top: 30%; left: 80%; animation-delay: 0.5s;}
+    .star:nth-child(3) { top: 60%; left: 50%; animation-delay: 1s;}
+    .star:nth-child(4) { top: 80%; left: 10%; animation-delay: 1.5s;}
+    .star:nth-child(5) { top: 20%; left: 60%; animation-delay: 0.8s;}
+    .star:nth-child(6) { top: 70%; left: 75%; animation-delay: 1.2s;}
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.8; transform: scale(1);}
+      50% { opacity: 1; transform: scale(1.5);}
+    }
+
+    .app {
+      max-width: 500px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 0 30px #ffb6e6;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      color: #ff4fa7;
+      text-shadow: 0 0 8px #fff, 0 0 20px #ffb6e6;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    button {
+      background: linear-gradient(90deg, #ff4fa7 0%, #ffb6e6 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      font-size: 18px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #ffb6e6;
+      transition: 0.3s;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #ffb6e6 0%, #ff4fa7 100%);
+      box-shadow: 0 0 20px #ff4fa7;
+      color: #fff0f6;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 18px;
+      border: 2px dashed #ff4fa7;
+      border-radius: 16px;
+      background: rgba(255, 182, 230, 0.2);
+      box-shadow: 0 0 12px #ffb6e6;
+      color: #d9007b;
+      font-size: 1.1em;
+      position: relative;
+    }
+
+    .loading {
+      font-size: 22px;
+      color: #ff69b4;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    .error {
+      color: #d9007b;
+      font-weight: bold;
+      text-shadow: 0 0 8px #fff;
+    }
+  </style>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+</head>
+<body>
+  <div class="app">
+    <h1>🌌 Star Wars Characters</h1>
+    <button id="getCharacter">Get Random Character</button>
+    <div id="output" class="output"></div>
+  </div>
+  <script>
+    const btn=document.getElementById("getCharacter");const output=document.getElementById("output");
+    async function fetchCharacter(){
+      try{
+        output.innerHTML=`<p class="loading"><i class="fas fa-spinner fa-spin"></i> Loading...</p>`;
+        const id=Math.floor(Math.random()*83)+1;
+        const res=await fetch(`https://www.swapi.tech/api/people/${id}`);
+        if(!res.ok)throw new Error();
+        const data=await res.json();
+        const character=data.result.properties;
+        const homeRes=await fetch(character.homeworld);
+        const homeData=await homeRes.json();
+        output.innerHTML=`
+          <h2>${character.name}</h2>
+          <p><strong>Height:</strong> ${character.height} cm</p>
+          <p><strong>Gender:</strong> ${character.gender}</p>
+          <p><strong>Birth Year:</strong> ${character.birth_year}</p>
+          <p><strong>Homeworld:</strong> ${homeData.result.properties.name}</p>
+        `;
+      }catch(error){
+        output.innerHTML=`<p class="error">⚠️ Error loading data. Try again!</p>`;
+      }
+    }
+    btn.addEventListener("click",fetchCharacter);
+  </script>
+</body>
+</html>
