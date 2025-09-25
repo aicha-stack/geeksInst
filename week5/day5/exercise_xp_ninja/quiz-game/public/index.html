@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffe0f7 0%, #ffe6fa 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #quiz {
+            background: rgba(255,255,255,0.9);
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.37);
+            padding: 40px 50px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #e75480;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px #ffb6c1;
+            position: relative;
+        }
+        h1::before, h1::after {
+            content: "🦋";
+            font-size: 1.2em;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+        .choice {
+            margin: 10px 0;
+            background: #fff0f5;
+            border-radius: 20px;
+            padding: 10px 20px;
+            border: 2px solid #e75480;
+            font-size: 1.2em;
+            transition: background 0.2s;
+        }
+        .choice:hover {
+            background: #ffe4ec;
+        }
+        button {
+            margin-top: 20px;
+            background: linear-gradient(90deg, #ffb6c1 0%, #ff69b4 100%);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 32px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 16px 0 rgba(255, 182, 193, 0.3);
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ff69b4 0%, #ffb6c1 100%);
+        }
+        body::before {
+            content: "🌸";
+            font-size: 5em;
+            position: absolute;
+            left: 10vw;
+            top: 10vh;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: "🌹🦋";
+            font-size: 4em;
+            position: absolute;
+            right: 10vw;
+            bottom: 10vh;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Quiz Game</h1>
+        <div id="quiz"></div>
+    </div>
+    <script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Guessing Game</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe0f7 0%, #f9c6e0 100%);
+      color: #d72660;
+    }
+    h1, h2 {
+      color: #d72660;
+      text-shadow: 1px 1px 4px #fff0fa;
+    }
+    button {
+      margin: 5px;
+      padding: 12px 28px;
+      font-size: 18px;
+      border-radius: 25px;
+      border: none;
+      background: #f9c6e0;
+      color: #d72660;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #ffd6ef;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #ffe0f7;
+    }
+    #leaderboard {
+      margin-top: 30px;
+      background: #fff0fa;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 12px #ffd6ef;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #scores {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+    #scores li {
+      padding: 8px 0;
+      border-bottom: 1px dashed #f9c6e0;
+      color: #d72660;
+      font-size: 16px;
+    }
+    #scores li:last-child {
+      border-bottom: none;
+    }
+    #game {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Emoji Guessing Game</h1>
+  <div id="game"></div>
+  <div id="leaderboard">
+    <h2>Leaderboard</h2>
+    <ul id="scores"></ul>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
