@@ -1,0 +1,10 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+}
+
+#quiz-container {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
