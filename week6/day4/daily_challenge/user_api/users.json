@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1759327232822",
+    "name": "Alice",
+    "lastName": "Smith",
+    "email": "alice@mail.com",
+    "username": "alice",
+    "password": "$2b$08$H8LZ6fXzgZnSG10n2doVmevMGOaCT1Mb5SsnA3K3FUMCHJ0IlPlga"
+  },
+  {
+    "id": "1759328369436",
+    "name": "AICHA",
+    "lastName": "AICHA",
+    "email": "aicha12ezzahraoui@gmail.com",
+    "username": "AICAOUI1-ETU",
+    "password": "$2b$08$JIpWi4cnroK07.LEUb6OK.BbXFJD1LWg0MbPUep7V.AGIBYdH8MUe"
+  }
+]

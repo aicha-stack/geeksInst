@@ -1,0 +1,112 @@
+<style>
+body {
+    background: linear-gradient(135deg, #ffd6ec 0%, #ffb6c1 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+#registerForm {
+    background: #fff0f6;
+    padding: 2rem 2.5rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    min-width: 320px;
+}
+#registerForm input {
+    padding: 0.7rem 1rem;
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    outline: none;
+    background: #fff;
+}
+#registerForm input:focus {
+    border-color: #ffd6ec;
+    background: #ffd6ec22;
+}
+#registerForm button {
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #ffb6c1 60%, #ffd6ec 100%);
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.12);
+    transition: background 0.2s, transform 0.2s;
+}
+#registerForm button:disabled {
+    background: #fbeaf3;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+#registerForm button:not(:disabled):hover {
+    background: linear-gradient(90deg, #ffd6ec 60%, #ffb6c1 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+</style>
+<form id="registerForm">
+    <input type="text" id="name" name="name" placeholder="Name" required>
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <input type="text" id="username" name="username" placeholder="Username" required>
+    <input type="password" id="password" name="password" placeholder="Password" required>
+    <button type="submit" id="submitBtn" disabled>Register</button>
+</form>
+<div id="message"></div>
+
+<script>
+const form = document.getElementById('registerForm');
+const submitBtn = document.getElementById('submitBtn');
+const messageBox = document.getElementById('message');
+
+// Activer le bouton uniquement si tous les champs sont remplis
+form.addEventListener('input', () => {
+  const allFilled = [...form.elements].every(el => el.type === 'submit' || el.value.trim() !== '');
+  submitBtn.disabled = !allFilled;
+});
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById('name').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    username: document.getElementById('username').value.trim(),
+    password: document.getElementById('password').value.trim(),
+  };
+
+  try {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      messageBox.style.color = 'green';
+      messageBox.textContent = `User registered successfully! (Username: ${result.user.username})`;
+      form.reset();
+      submitBtn.disabled = true;
+    } else {
+      messageBox.style.color = 'red';
+      messageBox.textContent = result.error || 'Registration failed';
+    }
+  } catch (err) {
+    messageBox.style.color = 'red';
+    messageBox.textContent = 'Error: ' + err.message;
+  }
+});
+</script>

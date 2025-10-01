@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Turn-Based Grid Capture — Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+    :root{
+        --bg:#fff0f6; --card:#ffe4f2; --accent:#d72660; --accent-2:#ffb7c5;
+        --base1:#d72660; --base2:#ffb7c5; --player1:#ff69b4; --player2:#a7c7e7;
+        --ob:#b39ddb;
+        --shadow:0 6px 18px rgba(215,38,96,0.08);
+        --border:#f8bbd0;
+    }
+    body{
+        font-family:'Quicksand', 'Inter', system-ui, Segoe UI, Arial;
+        margin:16px;
+        background:var(--bg);
+        color:#7b1fa2;
+    }
+    .container{
+        max-width:980px;
+        margin:0 auto;
+    }
+    header{
+        display:flex;
+        align-items:center;
+        gap:16px;
+        margin-bottom:12px;
+    }
+    h1{
+        font-size:22px;
+        margin:0;
+        color:var(--accent);
+        letter-spacing:1px;
+        font-weight:700;
+        text-shadow:0 2px 8px #ffb7c5;
+    }
+    .card{
+        background:var(--card);
+        padding:16px;
+        border-radius:18px;
+        box-shadow:var(--shadow);
+        margin-bottom:14px;
+        border:2px solid var(--border);
+        position:relative;
+    }
+    .card:after{
+        content:"";
+        position:absolute;
+        top:8px; right:8px;
+        width:24px; height:24px;
+        background:url('https://emojiapi.dev/api/v1/1f496/64.png') no-repeat center/contain;
+        opacity:0.15;
+        pointer-events:none;
+    }
+    .row{
+        display:flex;
+        gap:14px;
+        align-items:center;
+    }
+    input,button,select{
+        padding:10px;
+        border-radius:12px;
+        border:1.5px solid var(--border);
+        font-size:15px;
+        background:#fff;
+        transition:box-shadow 0.2s;
+    }
+    input:focus,button:focus{
+        outline:none;
+        box-shadow:0 0 0 2px var(--accent-2);
+    }
+    button{
+        cursor:pointer;
+        background:linear-gradient(90deg, var(--accent) 60%, var(--accent-2) 100%);
+        color:#fff;
+        border:none;
+        font-weight:600;
+        box-shadow:0 2px 8px #ffb7c5;
+        transition:background 0.2s;
+    }
+    button:hover{
+        background:linear-gradient(90deg, var(--accent-2) 60%, var(--accent) 100%);
+        color:#fff;
+    }
+    .board{
+        display:grid;
+        grid-template-columns:repeat(10,40px);
+        gap:6px;
+        padding:12px;
+        background:transparent;
+        border-radius:16px;
+        box-shadow:0 2px 12px #ffb7c5;
+        border:2px solid var(--border);
+    }
+    .cell{
+        width:40px;
+        height:40px;
+        border-radius:10px;
+        background:#ffe4f2;
+        border:1.5px solid #f8bbd0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:13px;
+        font-weight:600;
+        position:relative;
+        transition:background 0.2s;
+    }
+    .cell.base1{
+        background:var(--base1);
+        color:#fff;
+        box-shadow:0 0 8px #d72660;
+        border:2px solid #d72660;
+    }
+    .cell.base2{
+        background:var(--base2);
+        color:#fff;
+        box-shadow:0 0 8px #ffb7c5;
+        border:2px solid #ffb7c5;
+    }
+    .cell.player1{
+        box-shadow:inset 0 0 0 3px #fff, 0 0 0 2px var(--player1), 0 0 8px #ff69b4;
+        background:linear-gradient(135deg,#ffb7c5 60%,#ff69b4 100%);
+        color:#fff;
+    }
+    .cell.player2{
+        box-shadow:inset 0 0 0 3px #fff, 0 0 0 2px var(--player2), 0 0 8px #a7c7e7;
+        background:linear-gradient(135deg,#a7c7e7 60%,#ffe4f2 100%);
+        color:#fff;
+    }
+    .cell.obstacle{
+        background:var(--ob);
+        color:#fff;
+        border:2px dashed #b39ddb;
+        font-size:16px;
+        box-shadow:0 0 8px #b39ddb;
+    }
+    .controls{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        margin-top:10px;
+    }
+    .status{
+        margin-top:10px;
+        font-size:15px;
+        color:#d72660;
+        background:#fff0f6;
+        border-radius:8px;
+        padding:8px;
+        border:1px solid #f8bbd0;
+        box-shadow:0 2px 8px #ffb7c5;
+    }
+    .small{
+        font-size:13px;
+        color:#d72660;
+        font-style:italic;
+        letter-spacing:0.5px;
+    }
+    .hidden{
+        display:none;
+    }
+    #log{
+        background:#fff0f6;
+        border-radius:10px;
+        border:1.5px solid #f8bbd0;
+        color:#d72660;
+        font-size:13px;
+        font-family:'Quicksand',monospace;
+        box-shadow:0 2px 8px #ffb7c5;
+    }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header><h1>Grid Capture — Demo</h1><div class="small">10×10 turn-based capture game</div></header>
+
+    <div id="auth" class="card">
+      <div class="row">
+        <input id="username" placeholder="username" />
+        <input id="password" type="password" placeholder="password" />
+        <button id="btnRegister">Register</button>
+        <button id="btnLogin">Login</button>
+      </div>
+      <div class="small" id="authMsg"></div>
+    </div>
+
+    <div id="lobby" class="card hidden">
+      <div class="row">
+        <button id="btnCreate">Create New Game</button>
+        <input id="joinGameId" placeholder="game id to join" />
+        <button id="btnJoin">Join Game</button>
+        <button id="btnList">List My Games</button>
+      </div>
+      <div style="margin-top:8px" class="small">Game ID: <span id="currentGameId">—</span></div>
+    </div>
+
+    <div id="gameArea" class="card hidden">
+      <div style="display:flex;gap:16px">
+        <div>
+          <div id="board" class="board"></div>
+        </div>
+        <div style="min-width:220px">
+          <div><strong>Controls</strong></div>
+          <div class="controls">
+            <button id="btnUp">Up</button>
+            <button id="btnLeft">Left</button>
+            <button id="btnRight">Right</button>
+            <button id="btnDown">Down</button>
+            <button id="btnAttack" style="background:#b71c1c">Attack</button>
+          </div>
+          <div class="status" id="statusBox"></div>
+          <pre id="log" style="max-height:220px;overflow:auto;background:#f3f6fb;padding:8px;border-radius:6px"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = location.origin + '/api';
+    let token = null;
+    let me = null;
+    let currentGameId = null;
+    let pollInterval = null;
+
+    const $ = s => document.querySelector(s);
+    const $all = s => document.querySelectorAll(s);
+
+    $('#btnRegister').onclick = async () => {
+      const username = $('#username').value.trim();
+      const password = $('#password').value;
+      if(!username||!password) return showAuthMsg('fill username+password');
+      try {
+        const r = await fetch(API + '/register', {
+          method:'POST', headers:{'content-type':'application/json'},
+          body: JSON.stringify({ username, password })
+        });
+        const j = await r.json();
+        if (!r.ok) return showAuthMsg('error: ' + (j.error||JSON.stringify(j)));
+        showAuthMsg('registered successfully — you can now login');
+      } catch(e) { showAuthMsg('network error'); }
+    };
+
+    $('#btnLogin').onclick = async () => {
+      const username = $('#username').value.trim();
+      const password = $('#password').value;
+      if(!username||!password) return showAuthMsg('fill username+password');
+      try {
+        const r = await fetch(API + '/login', {
+          method:'POST', headers:{'content-type':'application/json'},
+          body: JSON.stringify({ username, password })
+        });
+        const j = await r.json();
+        if (!r.ok) return showAuthMsg('error: ' + (j.error||JSON.stringify(j)));
+        token = j.token;
+        me = j.user;
+        $('#auth').classList.add('hidden');
+        $('#lobby').classList.remove('hidden');
+        showAuthMsg('');
+        appendLog('logged in as ' + me.username);
+      } catch(e) { showAuthMsg('network error'); }
+    };
+
+    function showAuthMsg(m){ $('#authMsg').textContent = m || ''; }
+
+    $('#btnCreate').onclick = async () => {
+      const r = await authFetch('/games', { method: 'POST' });
+      if (!r) return;
+      const j = await r.json();
+      currentGameId = j.gameId;
+      $('#currentGameId').textContent = currentGameId;
+      enterGame(j.game);
+      appendLog('Created game ' + currentGameId);
+    };
+
+    $('#btnJoin').onclick = async () => {
+      const id = $('#joinGameId').value.trim();
+      if (!id) return alert('enter game id to join');
+      const r = await authFetch(`/games/${id}/join`, { method: 'POST' });
+      if (!r) return;
+      const j = await r.json();
+      currentGameId = j.game.id;
+      $('#currentGameId').textContent = currentGameId;
+      enterGame(j.game);
+      appendLog('Joined game ' + currentGameId);
+    };
+
+    $('#btnList').onclick = async () => {
+      const r = await authFetch('/api/games', { method: 'GET' });
+      if (!r) return;
+      const j = await r.json();
+      alert('Games:\n' + j.games.map(g => `${g.id} (${g.status}, players=${g.playersCount})`).join('\n'));
+    };
+
+    
+    $('#btnUp').onclick = () => doMove('up');
+    $('#btnDown').onclick = () => doMove('down');
+    $('#btnLeft').onclick = () => doMove('left');
+    $('#btnRight').onclick = () => doMove('right');
+    $('#btnAttack').onclick = () => doAttack();
+
+    async function doMove(dir) {
+      if (!currentGameId) return alert('no game');
+      const r = await authFetch(`/games/${currentGameId}/move`, {
+        method: 'POST',
+        headers: {'content-type':'application/json'},
+        body: JSON.stringify({ direction: dir })
+      });
+      if (!r) return;
+      const j = await r.json();
+      if (!r.ok) {
+        alert('Move failed: ' + (j.error || JSON.stringify(j)));
+        return;
+      }
+      renderBoard(j.game);
+      appendLog('moved ' + dir);
+    }
+
+    async function doAttack() {
+      if (!currentGameId) return alert('no game');
+      const r = await authFetch(`/games/${currentGameId}/attack`, { method:'POST' });
+      if (!r) return;
+      const j = await r.json();
+      if (!r.ok) {
+        alert('Attack failed: ' + (j.error || JSON.stringify(j)));
+        return;
+      }
+      renderBoard(j.game);
+      appendLog('attack: ' + (j.message || ''));
+    }
+
+
+    function authHeader() {
+      return token ? { 'Authorization': 'Bearer ' + token } : {};
+    }
+    async function authFetch(path, opts = {}) {
+      try {
+        const r = await fetch(API + path, { ...opts, headers: { ...(opts.headers||{}), ...authHeader() } });
+   
+        if (r.status === 401) {
+          alert('session expired or unauthorized — please login again');
+          location.reload();
+          return null;
+        }
+        return r;
+      } catch (e) {
+        alert('network error');
+        return null;
+      }
+    }
+
+    function enterGame(game) {
+      $('#lobby').classList.add('hidden');
+      $('#gameArea').classList.remove('hidden');
+      renderBoard(game);
+      updateStatus(game);
+      startPolling();
+    }
+
+    function startPolling() {
+      if (pollInterval) clearInterval(pollInterval);
+      pollInterval = setInterval(async () => {
+        if (!currentGameId) return;
+        const r = await authFetch(`/games/${currentGameId}`, { method: 'GET' });
+        if (!r) return;
+        const j = await r.json();
+        renderBoard(j.game);
+        updateStatus(j.game);
+      }, 1500);
+    }
+
+    function appendLog(msg){
+      const p = document.getElementById('log');
+      const t = new Date().toLocaleTimeString();
+      p.textContent = `[${t}] ${msg}\n` + p.textContent;
+    }
+    
+    function renderBoard(game) {
+      const board = $('#board');
+      board.innerHTML = '';
+      if (!game) return;
+     
+      for (let y=0;y<10;y++){
+        for (let x=0;x<10;x++){
+          const div = document.createElement('div');
+          div.className = 'cell';
+          div.dataset.x = x; div.dataset.y = y;
+          if ((game.obstacles||[]).some(o => o.x===x && o.y===y)) {
+            div.classList.add('obstacle');
+            div.textContent = 'X';
+          }
+
+          for (const p of game.players) {
+            if (p.base.x === x && p.base.y === y) {
+              div.classList.add(p === game.players[0] ? 'base1' : 'base2');
+              div.textContent = p === game.players[0] ? 'B1' : 'B2';
+            }
+            if (p.position.x === x && p.position.y === y) {
+              
+              div.classList.add(p === game.players[0] ? 'player1' : 'player2');
+              div.textContent = p === game.players[0] ? 'P1' : 'P2';
+            }
+          }
+          board.appendChild(div);
+        }
+      }
+     
+      const log = game.log ? game.log.slice().reverse().join('\n') : '';
+      $('#log').textContent = log;
+      updateStatus(game);
+    }
+
+    function updateStatus(game) {
+      let s = `Game status: ${game.status}`;
+      if (game.status === 'ongoing') {
+        s += '\nPlayers: ' + game.players.map(p => p.username + (game.currentTurn === p.id ? ' (turn)' : '')).join(', ');
+        s += `\nYour username: ${me.username}`;
+        if (game.currentTurn === me.id) s += '\nIt is your turn';
+        else s += '\nWaiting for opponent...';
+      } else if (game.status === 'waiting') {
+        s += '\nWaiting for opponent to join';
+      } else if (game.status === 'finished') {
+        s += `\nWinner: ${game.winner ? game.winner.username + ' ('+game.winner.reason+')' : 'N/A'}`;
+      }
+      $('#statusBox').textContent = s;
+    }
+
+   
+  </script>
+</body>
+</html>

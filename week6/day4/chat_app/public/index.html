@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chat App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="light">
+
+<div id="loginDiv" class="login-div">
+  <h2>Join Chat</h2>
+  <input type="text" id="usernameInput" placeholder="Choose a username" />
+  <input type="text" id="avatarInput" placeholder="Avatar URL (optional)" />
+  <select id="themeSelect">
+    <option value="light">Light Theme</option>
+    <option value="dark">Dark Theme</option>
+    <option value="blue">Blue Theme</option>
+  </select>
+  <button id="joinBtn">Join</button>
+</div>
+
+<div id="chatDiv" class="chat-div hidden">
+  <div class="sidebar">
+    <h3>Active Users</h3>
+    <div id="userList"></div>
+  </div>
+  <div class="chat-main">
+    <div id="messages" class="messages"></div>
+
+    <form id="messageForm">
+      <input id="messageInput" autocomplete="off" placeholder="Type a message" />
+      <button type="submit">Send</button>
+      <button id="emojiBtn" type="button">😀</button>
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emoji-button@4.6.2/dist/index.min.js"></script>
+<script src="chat.js"></script>
+</body>
+</html>
