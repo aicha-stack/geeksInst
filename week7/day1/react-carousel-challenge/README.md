@@ -1,0 +1,1 @@
+  un projet pour créer un **carousel React** avec le package `react-responsive-carousel`

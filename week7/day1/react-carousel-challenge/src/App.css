@@ -1,0 +1,13 @@
+.App {
+  font-family: Arial, sans-serif;
+}
+
+.carousel-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #333;
+}
