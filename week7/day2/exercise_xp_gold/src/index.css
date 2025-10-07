@@ -1,0 +1,56 @@
+
+.form-blog {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px 35px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-blog h1 {
+  text-align: center;
+  color: #2b3d63;
+  margin-bottom: 25px;
+}
+
+.form-blog h2 {
+  color: #334d80;
+  margin-bottom: 20px;
+}
+
+.form-blog label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.form-blog input,
+.form-blog textarea,
+.form-blog select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.form-blog button {
+  background-color: #2b3d63;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.form-blog button:hover {
+  background-color: #405b8c;
+}
+
+.form-blog p {
+  color: red;
+  margin-top: 5px;
+}

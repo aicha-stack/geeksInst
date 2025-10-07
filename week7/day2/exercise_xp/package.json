@@ -1,0 +1,27 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Real-time chat app using Express and Socket.io",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
