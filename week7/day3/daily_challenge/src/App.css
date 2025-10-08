@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-container {
+  background-color: #deb887;
+  padding: 30px;
+  border-top: 50px solid #2f2b2b;
+}
+
+.form-container h2 {
+  color: white;
+}
+
+input,
+select {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 5px 15px;
+}
+
+.info {
+  background-color: #0e4c50;
+  color: white;
+  padding: 20px;
+}
+
+.info h3 {
+  color: #fff;
+}
+
+p {
+  font-style: italic;
+}
