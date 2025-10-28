@@ -1,0 +1,138 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f2f5; 
+  color: #111;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.recipe-app {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border: 2px solid #f48fb1; 
+}
+
+
+.recipe-app h1 {
+  text-align: center;
+  color: #e91e63;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fdfdfd;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e91e63; 
+  box-shadow: 0 0 6px rgba(233, 30, 99, 0.3);
+}
+
+
+button {
+  background: linear-gradient(135deg, #e91e63, #000);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+.recipe-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  border: 1px solid #f1b6ce;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-2px);
+  border-color: #e91e63;
+}
+
+.recipe-card h3 {
+  color: #e91e63;
+  margin-bottom: 0.4rem;
+}
+
+.recipe-card p {
+  margin: 0.3rem 0;
+}
+
+.recipe-card ul {
+  list-style: square;
+  margin-left: 1.2rem;
+}
+
+.favorite-btn {
+  background-color: #000;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+
+.delete-btn {
+  background-color: #e91e63;
+}
+
+
+#clearRecipesButton {
+  background-color: #111;
+  color: white;
+  margin-top: 1rem;
+}
+
+
+#recipeContainer {
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
