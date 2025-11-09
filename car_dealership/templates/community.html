@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}Community{% endblock %}
+
+{% block content %}
+<div class="mb-12">
+  <!-- Hero Section -->
+  <div class="text-center mb-16 animate-fade-in">
+    <div class="inline-block bg-gradient-to-br from-blue-500/20 to-indigo-500/20 p-6 rounded-2xl mb-6 border border-blue-500/30">
+      <i class="fas fa-users text-blue-400 text-6xl"></i>
+    </div>
+    <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+      Join Our Community
+    </h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+      Connect with fellow car enthusiasts, share experiences, and stay updated with the latest news
+    </p>
+  </div>
+
+  <!-- Community Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-blue-500/20 to-indigo-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+        <i class="fas fa-users text-blue-400 text-2xl"></i>
+      </div>
+      <h3 class="text-3xl font-bold text-white mb-2">1,500+</h3>
+      <p class="text-gray-400">Active Members</p>
+    </div>
+
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+        <i class="fas fa-comments text-emerald-400 text-2xl"></i>
+      </div>
+      <h3 class="text-3xl font-bold text-white mb-2">5,000+</h3>
+      <p class="text-gray-400">Discussions</p>
+    </div>
+
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-500/30">
+        <i class="fas fa-star text-purple-400 text-2xl"></i>
+      </div>
+      <h3 class="text-3xl font-bold text-white mb-2">4.8/5</h3>
+      <p class="text-gray-400">Average Rating</p>
+    </div>
+
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-rose-500/20 to-orange-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 border border-rose-500/30">
+        <i class="fas fa-calendar-check text-rose-400 text-2xl"></i>
+      </div>
+      <h3 class="text-3xl font-bold text-white mb-2">50+</h3>
+      <p class="text-gray-400">Events Monthly</p>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <!-- Forums -->
+    <div class="card-professional p-8 animate-fade-in">
+      <div class="flex items-center mb-6">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-xl shadow-lg mr-4">
+          <i class="fas fa-comments text-white text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white">Discussion Forums</h2>
+          <p class="text-gray-400">Join the conversation</p>
+        </div>
+      </div>
+      <ul class="space-y-3 text-gray-300">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-blue-400 mr-3"></i>
+          Share your car experiences and tips
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-blue-400 mr-3"></i>
+          Get advice from experienced members
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-blue-400 mr-3"></i>
+          Ask questions and get expert answers
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-blue-400 mr-3"></i>
+          Connect with local car enthusiasts
+        </li>
+      </ul>
+      <a href="#" class="btn-primary mt-6 inline-flex items-center">
+        <i class="fas fa-arrow-right mr-2"></i>
+        Visit Forums
+      </a>
+    </div>
+
+    <!-- Events -->
+    <div class="card-professional p-8 animate-fade-in">
+      <div class="flex items-center mb-6">
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-4 rounded-xl shadow-lg mr-4">
+          <i class="fas fa-calendar-alt text-white text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-white">Community Events</h2>
+          <p class="text-gray-400">Join us for exciting events</p>
+        </div>
+      </div>
+      <ul class="space-y-3 text-gray-300">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-emerald-400 mr-3"></i>
+          Monthly car shows and meetups
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-emerald-400 mr-3"></i>
+          Test drive events and showcases
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-emerald-400 mr-3"></i>
+          Educational workshops and seminars
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-emerald-400 mr-3"></i>
+          Exclusive member-only gatherings
+        </li>
+      </ul>
+      <a href="#" class="btn-primary mt-6 inline-flex items-center">
+        <i class="fas fa-arrow-right mr-2"></i>
+        View Events
+      </a>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="card-professional p-8 md:p-12 mb-12 animate-fade-in">
+    <h2 class="text-3xl font-bold text-white mb-8 text-center">
+      <i class="fas fa-quote-left text-blue-400 mr-3"></i>
+      What Our Community Says
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-slate-800/50 p-6 rounded-xl border border-blue-500/20">
+        <div class="flex items-center mb-4">
+          <div class="bg-gradient-to-br from-blue-500/20 to-indigo-500/20 w-12 h-12 rounded-full flex items-center justify-center mr-3 border border-blue-500/30">
+            <i class="fas fa-user text-blue-400"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold">Sarah Johnson</h4>
+            <p class="text-gray-400 text-sm">Member since 2023</p>
+          </div>
+        </div>
+        <p class="text-gray-300 italic">
+          "The community here is amazing! I've learned so much about car maintenance and made great friends. Highly recommend!"
+        </p>
+        <div class="flex text-yellow-400 mt-3">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-xl border border-blue-500/20">
+        <div class="flex items-center mb-4">
+          <div class="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 w-12 h-12 rounded-full flex items-center justify-center mr-3 border border-emerald-500/30">
+            <i class="fas fa-user text-emerald-400"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold">Michael Chen</h4>
+            <p class="text-gray-400 text-sm">Member since 2022</p>
+          </div>
+        </div>
+        <p class="text-gray-300 italic">
+          "Best car dealership community I've been part of. The events are fantastic and the support is incredible!"
+        </p>
+        <div class="flex text-yellow-400 mt-3">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/50 p-6 rounded-xl border border-blue-500/20">
+        <div class="flex items-center mb-4">
+          <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 w-12 h-12 rounded-full flex items-center justify-center mr-3 border border-purple-500/30">
+            <i class="fas fa-user text-purple-400"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold">Emily Rodriguez</h4>
+            <p class="text-gray-400 text-sm">Member since 2024</p>
+          </div>
+        </div>
+        <p class="text-gray-300 italic">
+          "I found my dream car through this community! The members are helpful and the dealership is trustworthy."
+        </p>
+        <div class="flex text-yellow-400 mt-3">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Join CTA -->
+  <div class="card-professional p-12 text-center animate-fade-in bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border-2 border-blue-500/30">
+    <h2 class="text-4xl font-bold text-white mb-4">Ready to Join Us?</h2>
+    <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+      Become part of our growing community of car enthusiasts. Share your passion, learn from others, 
+      and enjoy exclusive benefits and events.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#" class="btn-primary inline-flex items-center">
+        <i class="fas fa-user-plus mr-2"></i>
+        Sign Up Now
+      </a>
+      <a href="#" class="btn-secondary inline-flex items-center">
+        <i class="fas fa-sign-in-alt mr-2"></i>
+        Log In
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

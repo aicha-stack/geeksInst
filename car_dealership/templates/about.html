@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="mb-12">
+  <!-- Hero Section -->
+  <div class="text-center mb-16 animate-fade-in">
+    <div class="inline-block bg-gradient-to-br from-blue-500/20 to-indigo-500/20 p-6 rounded-2xl mb-6 border border-blue-500/30">
+      <i class="fas fa-car-side text-blue-400 text-6xl"></i>
+    </div>
+    <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+      About Our Dealership
+    </h1>
+    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+      Your trusted partner for quality vehicles with exceptional service
+    </p>
+  </div>
+
+  <!-- Mission Section -->
+  <div class="card-professional p-8 md:p-12 mb-8 animate-fade-in">
+    <div class="flex items-start space-x-4 mb-6">
+      <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-xl shadow-lg flex-shrink-0">
+        <i class="fas fa-bullseye text-white text-2xl"></i>
+      </div>
+      <div>
+        <h2 class="text-3xl font-bold text-white mb-3">Our Mission</h2>
+        <p class="text-gray-300 text-lg leading-relaxed">
+          At Car Dealership, we are committed to providing our customers with the highest quality vehicles 
+          at competitive prices. Our mission is to make car ownership accessible, enjoyable, and stress-free 
+          for everyone. We believe in building lasting relationships with our customers through transparency, 
+          integrity, and exceptional service.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+        <i class="fas fa-shield-alt text-emerald-400 text-3xl"></i>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-3">Trust & Integrity</h3>
+      <p class="text-gray-300">
+        We operate with complete transparency and honesty in all our dealings. Your trust is our most valuable asset.
+      </p>
+    </div>
+
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-blue-500/20 to-indigo-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+        <i class="fas fa-star text-blue-400 text-3xl"></i>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-3">Quality First</h3>
+      <p class="text-gray-300">
+        Every vehicle in our inventory undergoes rigorous inspection to ensure it meets our high standards of quality.
+      </p>
+    </div>
+
+    <div class="card-professional p-6 text-center animate-fade-in">
+      <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-500/30">
+        <i class="fas fa-heart text-purple-400 text-3xl"></i>
+      </div>
+      <h3 class="text-xl font-bold text-white mb-3">Customer Care</h3>
+      <p class="text-gray-300">
+        Your satisfaction is our priority. We provide personalized service and support throughout your journey with us.
+      </p>
+    </div>
+  </div>
+
+  <!-- Story Section -->
+  <div class="card-professional p-8 md:p-12 mb-8 animate-fade-in">
+    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+      <i class="fas fa-book-open text-blue-400 mr-3"></i>
+      Our Story
+    </h2>
+    <div class="space-y-4 text-gray-300 text-lg leading-relaxed">
+      <p>
+        Founded with a vision to revolutionize the car buying experience, Car Dealership has been serving 
+        customers for years with dedication and passion. What started as a small family business has grown 
+        into a trusted name in the automotive industry.
+      </p>
+      <p>
+        We understand that buying a car is one of the most significant decisions you'll make. That's why 
+        we've built our business around making this process as smooth and enjoyable as possible. Our team 
+        of experienced professionals is here to guide you every step of the way.
+      </p>
+      <p>
+        Today, we're proud to offer a diverse selection of quality vehicles, from reliable daily drivers 
+        to luxury models, all backed by our commitment to excellence and customer satisfaction.
+      </p>
+    </div>
+  </div>
+
+  <!-- Team Section -->
+  <div class="card-professional p-8 md:p-12 animate-fade-in">
+    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+      <i class="fas fa-users-cog text-blue-400 mr-3"></i>
+      Our Team
+    </h2>
+    <p class="text-gray-300 text-lg mb-6">
+      Meet the dedicated professionals who make it all possible:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center">
+        <div class="bg-gradient-to-br from-blue-500/20 to-indigo-500/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+          <i class="fas fa-user-tie text-blue-400 text-4xl"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-white mb-2">Sales Team</h4>
+        <p class="text-gray-400 text-sm">Expert advisors ready to help you find the perfect vehicle</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-gradient-to-br from-emerald-500/20 to-teal-500/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-500/30">
+          <i class="fas fa-tools text-emerald-400 text-4xl"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-white mb-2">Service Team</h4>
+        <p class="text-gray-400 text-sm">Certified technicians ensuring quality and reliability</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-500/30">
+          <i class="fas fa-headset text-purple-400 text-4xl"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-white mb-2">Support Team</h4>
+        <p class="text-gray-400 text-sm">Always here to assist you with any questions or concerns</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-gradient-to-br from-rose-500/20 to-orange-500/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4 border border-rose-500/30">
+          <i class="fas fa-chart-line text-rose-400 text-4xl"></i>
+        </div>
+        <h4 class="text-lg font-semibold text-white mb-2">Management</h4>
+        <p class="text-gray-400 text-sm">Strategic leadership committed to continuous improvement</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

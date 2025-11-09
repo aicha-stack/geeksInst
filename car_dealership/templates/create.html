@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+  <div class="card-professional p-8 lg:p-10">
+    <div class="mb-8">
+      <div class="flex items-center space-x-3 mb-3">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl shadow-lg">
+          <i class="fas fa-plus-circle text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Add New Vehicle</h1>
+          <p class="text-gray-300 mt-1">Fill in the details below to add a new vehicle to the inventory</p>
+        </div>
+      </div>
+    </div>
+
+    <form action="{{url_for('create')}}" method="POST" class="space-y-6">
+      <div>
+        <label class="block text-sm font-semibold text-gray-300 mb-2.5 flex items-center">
+          <i class="fas fa-car mr-2 text-blue-600"></i>Model
+        </label>
+        <input 
+          type="text" 
+          name="model" 
+          placeholder="e.g., Toyota Camry" 
+          required
+          class="input-professional w-full"
+        >
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-semibold text-gray-300 mb-2.5 flex items-center">
+            <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>Year
+          </label>
+          <input 
+            type="number" 
+            name="year" 
+            placeholder="e.g., 2023" 
+            min="1900" 
+            max="2030"
+            required
+            class="input-professional w-full"
+          >
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-300 mb-2.5 flex items-center">
+            <i class="fas fa-dollar-sign mr-2 text-blue-600"></i>Price
+          </label>
+          <input 
+            type="number" 
+            name="price" 
+            placeholder="e.g., 25000" 
+            step="0.01"
+            min="0"
+            required
+            class="input-professional w-full"
+          >
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-300 mb-2.5 flex items-center">
+          <i class="fas fa-align-left mr-2 text-blue-600"></i>Description
+        </label>
+        <textarea 
+          name="description" 
+          placeholder="Enter a detailed description of the vehicle..." 
+          rows="5"
+          required
+          class="input-professional w-full resize-none"
+        ></textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-300 mb-2.5 flex items-center">
+          <i class="fas fa-image mr-2 text-blue-600"></i>Image URL
+        </label>
+        <input 
+          type="url" 
+          name="image_url" 
+          placeholder="https://example.com/image.jpg" 
+          class="input-professional w-full"
+        >
+        <p class="mt-2 text-xs text-gray-400 flex items-center">
+          <i class="fas fa-info-circle mr-1.5"></i>Optional: Provide a URL to an image of the vehicle
+        </p>
+      </div>
+
+      <div class="flex items-center space-x-4 pt-6 border-t border-gray-700/50">
+        <button 
+          type="submit" 
+          class="flex-1 btn-primary">
+          <i class="fas fa-check mr-2"></i>Add Vehicle
+        </button>
+        <a 
+          href="{{ url_for('index') }}" 
+          class="btn-secondary">
+          <i class="fas fa-times mr-2"></i>Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

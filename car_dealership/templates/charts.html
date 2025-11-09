@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-8">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-white mb-2">
+      <i class="fas fa-chart-line text-blue-400 mr-2"></i>Analytics Dashboard
+    </h1>
+    <p class="text-gray-300">Comprehensive insights into your dealership performance</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Cars per Model -->
+    <div class="card-professional p-6 border border-blue-500/30">
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white mb-1 flex items-center">
+          <i class="fas fa-car text-blue-400 mr-2"></i>Vehicles by Model
+        </h3>
+        <p class="text-sm text-gray-400">Distribution of vehicles in inventory</p>
+      </div>
+      <canvas id="carsChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Sales per Salesperson -->
+    <div class="card-professional p-6 border border-blue-500/30">
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white mb-1 flex items-center">
+          <i class="fas fa-user-tie text-indigo-400 mr-2"></i>Sales per Salesperson
+        </h3>
+        <p class="text-sm text-gray-400">Performance metrics by sales team</p>
+      </div>
+      <canvas id="salespersonChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Customers Count -->
+    <div class="card-professional p-6 border border-blue-500/30">
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white mb-1 flex items-center">
+          <i class="fas fa-users text-emerald-400 mr-2"></i>Customer Analytics
+        </h3>
+        <p class="text-sm text-gray-400">Customer base overview</p>
+      </div>
+      <canvas id="customersChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Sales per Year -->
+    <div class="card-professional p-6 border border-blue-500/30">
+      <div class="mb-4">
+        <h3 class="text-xl font-semibold text-white mb-1 flex items-center">
+          <i class="fas fa-calendar-alt text-rose-400 mr-2"></i>Sales Trend
+        </h3>
+        <p class="text-sm text-gray-400">Yearly sales performance</p>
+      </div>
+      <canvas id="salesYearChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+const carsData = {{ data.cars|tojson|safe }};
+const salesData = {{ data.salespeople|tojson|safe }};
+const customersData = {{ data.customers|tojson|safe }};
+const yearData = {{ data.sales_year|tojson|safe }};
+
+// Professional color palette
+const colors = {
+  primary: ['#3B82F6', '#6366F1', '#8B5CF6', '#EC4899', '#F59E0B', '#10B981'],
+  gradient: ['#3B82F6', '#2563EB', '#1D4ED8']
+};
+
+// Cars per Model
+new Chart(document.getElementById('carsChart'), {
+    type: 'doughnut',
+    data: {
+        labels: carsData.labels,
+        datasets: [{
+            data: carsData.values,
+            backgroundColor: colors.primary,
+            borderWidth: 2,
+            borderColor: '#1e293b'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    font: { size: 12 },
+                    color: '#cbd5e1'
+                }
+            }
+        }
+    }
+});
+
+// Sales per Salesperson
+new Chart(document.getElementById('salespersonChart'), {
+    type: 'bar',
+    data: {
+        labels: salesData.labels.length > 0 ? salesData.labels : ['No Data'],
+        datasets: [{
+            label: 'Number of Sales',
+            data: salesData.values.length > 0 ? salesData.values : [0],
+            backgroundColor: '#3B82F6',
+            borderRadius: 8,
+            borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return 'Sales: ' + context.parsed.y;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(59, 130, 246, 0.1)' },
+                ticks: {
+                    stepSize: 1,
+                    color: '#cbd5e1'
+                }
+            },
+            x: {
+                grid: { display: false },
+                ticks: {
+                    color: '#cbd5e1'
+                }
+            }
+        }
+    }
+});
+
+// Customers Count
+new Chart(document.getElementById('customersChart'), {
+    type: 'doughnut',
+    data: {
+        labels: customersData.labels.length > 0 ? customersData.labels : ['No Data'],
+        datasets: [{
+            data: customersData.values.length > 0 ? customersData.values : [0],
+            backgroundColor: ['#10B981', '#34D399', '#6EE7B7', '#059669', '#047857'],
+            borderWidth: 2,
+            borderColor: '#1e293b'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    font: { size: 12 }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += context.parsed + ' customers';
+                        return label;
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Sales per Year
+new Chart(document.getElementById('salesYearChart'), {
+    type: 'line',
+    data: {
+        labels: yearData.labels.length > 0 ? yearData.labels : ['No Data'],
+        datasets: [{
+            label: 'Number of Sales',
+            data: yearData.values.length > 0 ? yearData.values : [0],
+            borderColor: '#EC4899',
+            backgroundColor: 'rgba(236, 72, 153, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#EC4899',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    color: '#cbd5e1'
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return 'Sales: ' + context.parsed.y;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(59, 130, 246, 0.1)' },
+                ticks: {
+                    stepSize: 1,
+                    color: '#cbd5e1'
+                }
+            },
+            x: {
+                grid: { display: false },
+                ticks: {
+                    color: '#cbd5e1'
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
